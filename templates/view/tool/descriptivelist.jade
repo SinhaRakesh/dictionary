@@ -1,0 +1,52 @@
+section(id='{$_name}' class="{$class} row course_area" style="{$style}")
+	.container
+		.row.m0.section_title
+			h2 Pathagar Courses
+			.title_border
+				.icon_side
+					i.mdi.mdi-google-physical-web
+			h6
+				| It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or presentation, eg typography, font, or layout.
+		.row.m0.course_inner
+			{rows}{row}
+			.col-md-6.course_item
+				.media.item.wow.fadeInUp.animated(data-wow-delay='0.2s')
+					.media-left.item_left
+						.item_left_inner
+							img.media-object(src='{$image}', alt='{$name}')
+							.hover_content
+								//- h6
+								//- 	i.mdi.mdi-comment-account-outline
+								//- 	span 10
+								//- h6
+								//- 	i.mdi.mdi-library
+								//- 	span 89
+								a.btn.btn-primary(href="{$slug_url}") Read More
+					.media-body.item_body
+						a.media-heading(href='{$slug_url}') {$name}
+						ul.nav
+							li
+								a(href='#')
+									i.fa.fa-clock-o
+									span {$created_at}
+						//- 	li
+						//- 		a(href='#')
+						//- 			i.mdi.mdi-account
+						//- 			span Adim Smith
+						//- 	li
+						//- 		a(href='#')
+						//- 			i.mdi.mdi-calendar-clock
+						//- 			span 6 Month
+						p
+							| {$description}
+			{/}{/}
+			{not_found}
+			div.full-width.alert.alert-warning(role="alert")
+				strong.glyphicon.glyphicon-warning-sign &nbsp;Warning!
+					span &nbsp;{$not_found_message}
+			{/}
+			{paginator_wrapper}
+			.xepan-commerce-item-paginator(style='float:none; clear:both')
+				{$Paginator}
+			{/}
+// End Courses Area

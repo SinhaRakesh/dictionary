@@ -1,0 +1,14 @@
+<div id="{$_name}" class="row {$class}" style="{$style}" >
+{category_list}
+    <ul class="nav navbar-nav">
+    {rows}{row}
+    <li class="course" aria-haspopup="true" data-id='{$id}'>
+      <a href="{$url}">
+          {$name}
+        </a>
+            {nested_course_wrapper}
+            {$nested_course}
+            {/}
+    {/}{/}
+{/category_list}
+</div>

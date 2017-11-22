@@ -1,0 +1,35 @@
+
+<section id="{$_name}" style="{$style}" class="{$class} row course_area">
+  <div class="container">
+    <div class="row m0 section_title">
+      <h2>Pathagar Courses</h2>
+      <div class="title_border">
+        <div class="icon_side"><i class="mdi mdi-google-physical-web"></i></div>
+      </div>
+      <h6>It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or presentation, eg typography, font, or layout.</h6>
+    </div>
+    <div class="row m0 course_inner">{rows}{row}
+      <div class="col-md-6 course_item">
+        <div data-wow-delay="0.2s" class="media item wow fadeInUp animated">
+          <div class="media-left item_left">
+            <div class="item_left_inner"><img src="{$image}" alt="{$name}" class="media-object"/>
+              <div class="hover_content"><a href="{$slug_url}" class="btn btn-primary">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="media-body item_body"><a href="{$slug_url}" class="media-heading">{$name}</a>
+            <ul class="nav">
+              <li><a href="#"><i class="fa fa-clock-o"></i><span>{$created_at}</span></a></li>
+            </ul>
+            <p>{$description}</p>
+          </div>
+        </div>
+      </div>{/}{/}
+      {not_found}
+      <div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>{/}
+      {paginator_wrapper}
+      <div style="float:none; clear:both" class="xepan-commerce-item-paginator">{$Paginator}</div>{/}
+    </div>
+  </div>
+</section>
+<!-- End Courses Area-->

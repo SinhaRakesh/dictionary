@@ -1,0 +1,26 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xavoc/dictionary/Tool_LibraryList')
+	.xepan-cms-group-panel.clearfix
+		#collapse-item-list.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+			.panel-body(style="padding-top:0px;padding-bottom:0px;")
+				.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+				.xepan-cms-group-panel.clearfix
+					div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#show-hide-item-list-option" aria-expanded="false")
+						span Hide/ Show
+						i.fa.fa-chevron-down.pull-right
+				#show-hide-item-list-option.xepan-cms-tools-bar-panel.row-fluid.collapse
+					table.table.table-condensed.table-hover.xepan-cms-tool-table
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Type
+							td.xepan-tool-option-value
+								select#display_item(data-attr='type' data-defaultvalue="all")
+									option(value="Descriptive") Descriptive
+									option(value="Objective") Objective
+	script(type='text/javascript').
+		$('\\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+		$('\\#{$_name}').on('show',function(event){
+			$('\\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));
+			});
+		});

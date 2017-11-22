@@ -1,4 +1,5 @@
 <?php
+namespace xavoc\dictionary;
 
 class Model_Objective extends Model_Library{
 

@@ -1,13 +1,14 @@
 <?php
+
 namespace xavoc\dictionary;
 
-class page_dictionary extends \xepan\base\Page{
-	public $title = "Dictionary Management";
+class page_test extends \Page{
+	public $title = "test";
 	
 	function init(){
 		parent::init();
 
-		$crud = $this->add('xepan\hr\CRUD');
+		$crud = $this->add('CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Dictionary');
 		$crud->setModel($model);
 

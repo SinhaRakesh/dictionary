@@ -1,4 +1,5 @@
 <?php
+namespace xavoc\dictionary;
 
 class Model_LibraryCourseAssociation extends Model_Base_Table{
 	public $table = "library_course_association";

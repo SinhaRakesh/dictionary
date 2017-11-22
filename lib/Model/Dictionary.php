@@ -1,5 +1,7 @@
 <?php
 
+namespace xavoc\dictionary;
+
 class Model_Dictionary extends Model_Library{
 
 	function init(){

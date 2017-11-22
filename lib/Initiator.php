@@ -1,0 +1,46 @@
+<?php
+
+namespace xavoc\dictionary;
+
+class Initiator extends \Controller_Addon {
+    
+    public $addon_name = 'xavoc_dictionary';
+
+    function setup_admin(){
+
+        $this->routePages('xavoc_dictionary');
+        $this->addLocation(array('template'=>'templates','js'=>'templates/js','css'=>'templates/css'))
+        ->setBaseURL('../shared/apps/xavoc/dictionary/');
+
+        $m = $this->app->top_menu->addMenu('Pathshala');
+        $m->addItem(['Course','icon'=>'fa fa-cog'],'xavoc_dictionary_course');
+        $m->addItem(['Descriptive','icon'=>'fa fa-cog'],'xavoc_dictionary_descriptive');
+        $m->addItem(['Dictionary','icon'=>'fa fa-cog'],'xavoc_dictionary_dictionary');
+        $m->addItem(['Objective','icon'=>'fa fa-cog'],'xavoc_dictionary_objective');
+        $m->addItem(['Word of day','icon'=>'fa fa-cog'],'xavoc_dictionary_wordofday');
+
+        return $this;
+    }
+
+    function setup_pre_frontend(){
+        $this->routePages('xavoc_dictionary');
+        $this->addLocation(array('template'=>'templates','js'=>'templates/js','css'=>'templates/css'))
+        ->setBaseURL('./shared/apps/xavoc/dictionary/');
+
+        return $this;
+    }
+
+
+    function setup_frontend(){
+        $this->routePages('xavoc_dictionary');
+        $this->addLocation(array('template'=>'templates','js'=>'templates/js','css'=>'templates/css'))
+        ->setBaseURL('./shared/apps/xavoc/ispmanager/');
+        
+        $this->app->exportFrontEndTool('xavoc\dictionary\Tool_LibraryList','Dictionary');
+        $this->app->exportFrontEndTool('xavoc\dictionary\Tool_Descriptive','Dictionary');
+        $this->app->exportFrontEndTool('xavoc\dictionary\Tool_Course','Dictionary');
+        
+        return $this;
+    }
+
+}
