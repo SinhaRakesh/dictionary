@@ -1,0 +1,15 @@
+
+div(id='{$_name}' class="{$class} word-of-day" style="{$style}")
+	{rows}{row}
+	h2 {$name}
+	p {$description}
+	{/}{/}
+	{not_found}
+	div.full-width.alert.alert-warning(role="alert")
+		strong.glyphicon.glyphicon-warning-sign &nbsp;Warning!
+			span &nbsp;{$not_found_message}
+	{/}
+	{paginator_wrapper}
+	.xepan-commerce-item-paginator(style='float:none; clear:both')
+		{$Paginator}
+	{/}

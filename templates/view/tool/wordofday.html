@@ -1,0 +1,9 @@
+
+<div id="{$_name}" style="{$style}" class="{$class} word-of-day">{rows}{row}
+  <h2>{$name}</h2>
+  <p>{$description}</p>{/}{/}
+  {not_found}
+  <div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>{/}
+  {paginator_wrapper}
+  <div style="float:none; clear:both" class="xepan-commerce-item-paginator">{$Paginator}</div>{/}
+</div>
