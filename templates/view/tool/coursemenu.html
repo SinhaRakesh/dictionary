@@ -1,6 +1,5 @@
-<div id="{$_name}" class="row {$class}" style="{$style}" >
-{category_list}
-    <ul class="nav navbar-nav">
+<ul id="{$_name}" class="nav navbar-nav navbar-right {$class}" style="{$style}" >
+    {category_list}
     {rows}{row}
     <li class="course" aria-haspopup="true" data-id='{$id}'>
       <a href="{$url}">
@@ -10,5 +9,4 @@
             {$nested_course}
             {/}
     {/}{/}
-{/category_list}
-</div>
+    {/category_list}
