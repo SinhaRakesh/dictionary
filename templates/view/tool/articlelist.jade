@@ -1,0 +1,34 @@
+div(id='{$_name}' class="{$class} " style="{$style}")
+		{rows}{row}
+		.col-md-4.member_area.col-sm-12.col-lg-4.col-xs-12
+			.member.animated.wow.fadeIn(data-wow-delay="0.3s")
+				div.member_img
+					img(src="{image}websites/pathshala/www/img/latest_news/1.jpg{/}" alt="{$name}" style="width:100%;")
+					div(class="date")
+						h2 {day}12{/}
+						h6 {month}jun{/}
+					div(class="hover_content")
+						div(class="content_left")
+							h6 Posted by
+							span Admin
+						div(class="content_right" style="display:none;")
+							h6
+								i(class="mdi mdi-comment-processing")
+								span 8
+							h6
+								i(class="mdi mdi-heart-outline")
+								span 20
+				div(class="member_info")
+					h4 {$name}
+					p {$description}
+					a(href="{$read_more}") Read more
+		{/}{/}
+		{not_found}
+		div.full-width.alert.alert-warning(role="alert")
+			strong.glyphicon.glyphicon-warning-sign &nbsp;Warning!
+				span &nbsp;{$not_found_message}
+		{/}
+		{paginator_wrapper}
+		.xepan-commerce-item-paginator(style='float:none; clear:both')
+			{$Paginator}
+		{/}

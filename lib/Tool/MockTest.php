@@ -2,7 +2,7 @@
 
 namespace xavoc\dictionary;
 
-class Tool_MocTest extends \xepan\cms\View_Tool{
+class Tool_MockTest extends \xepan\cms\View_Tool{
 	public $options = [
 		];
 
@@ -11,5 +11,6 @@ class Tool_MocTest extends \xepan\cms\View_Tool{
 		
 		if($this->owner instanceof \AbstractController) return;
 		
+		$this->add('View')->set('Mock Test');
 	}
 }

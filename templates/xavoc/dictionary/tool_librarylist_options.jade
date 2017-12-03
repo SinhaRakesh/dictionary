@@ -15,6 +15,24 @@
 								select#display_item(data-attr='type' data-defaultvalue="all")
 									option(value="Descriptive") Descriptive
 									option(value="Objective") Objective
+									option(value="Library") Library
+									option(value="Article") Article
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Limit
+							td.xepan-tool-option-value
+								input#record-limit(data-attr='limit' data-defaultvalue="0")
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Heading
+							td.xepan-tool-option-value
+								input#record-heading(data-attr='heading' data-defaultvalue="Library")
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Heading Description
+							td.xepan-tool-option-value
+								input#heading-description(data-attr='heading' data-defaultvalue="")
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Detail Page
+							td.xepan-tool-option-value
+								input#detail-page(data-attr='detailpage' data-defaultvalue="detail")
 	script(type='text/javascript').
 		$('\\#{$_name} [data-attr]').on('change',function(){
 			$(current_selected_component).attr($(this).data('attr'),$(this).val());

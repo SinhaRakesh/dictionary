@@ -10,18 +10,25 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 		parent::init();
 		
 		if($this->owner instanceof \AbstractController) return;
-		
+		$slug = $_GET['slug'];
 
 		$model = $this->add('xavoc\dictionary\Model_WordOfDay');
+		if($slug)
+			$model->addCondition('slug_url',$slug);
+		$model->setLimit(1);
+		$model->tryLoadAny();
 		
-		$this->complete_lister = $cl = $this->add('CompleteLister',null,null,['view/tool/wordofday']);
-		$cl->setModel($model);
-		//not record found
-		if(!$model->count()->getOne())
-			$cl->template->set('not_found_message','No Record Found');
-		else
-			$cl->template->del('not_found');		
-		$cl->add('xepan\cms\Controller_Tool_Optionhelper',['options'=>$this->options,'model'=>$model]);
+		if(!$model->loaded()){
+			$this->add('View')->set('word of day not found');
+		}
 
+		$this->setModel($model);
+
+		if(!$slug)
+			$this->template->set('url',$this->app->url('word-of-day',['slug'=>$model['slug_url']]));
+	}
+
+	function defaultTemplate(){
+		return ['view/tool/wordofday'];
 	}
 }

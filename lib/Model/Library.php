@@ -14,8 +14,8 @@ class Model_Library extends Model_Base_Table{
 		parent::init();
 
 		$this->addField('name');
-		$this->addField('description')->type('text');
-		$this->addField('type')->enum(['Descriptive','Dictionary','Objective']);
+		$this->addField('description')->type('text')->display(array('form'=>'xepan\base\RichText'));
+		$this->addField('type')->enum(['Descriptive','Dictionary','Objective','Article']);
 		$this->addField('a');
 		$this->addField('b');
 		$this->addField('c');
@@ -23,9 +23,13 @@ class Model_Library extends Model_Base_Table{
 		$this->addField('answer');
 		$this->addField('display_order')->type('Number');
 		$this->addField('created_at')->type('dateTime')->defaultValue($this->app->now)->system(true);
-		$this->addField('slug_url')->system(true);
-		$this->addField('is_word_of_day')->type('boolean');
-
+		$this->addField('slug_url');
+		$this->addField('is_word_of_day')->type('boolean')->defaultValue(0);
+		$this->addField('sentance');
+		$this->addField('synonyms');
+		$this->addField('antonyms');
+		// $this->addField('created_at')->type('DatePicker');
+		
 		$this->add('xepan\filestore\Field_Image','image_id')->display(['form'=>'xepan\base\Upload']);
 		$this->addField('status')->enum(['Active','Inactive'])->defaultValue('Active');
 
@@ -34,6 +38,7 @@ class Model_Library extends Model_Base_Table{
 		$this->is([
 			'name|to_trim|required',
 			'type|to_trim|required',
+			'slug_url|to_trim|required',
 		]);
 
 		$this->addHook('beforeSave',$this);
@@ -41,7 +46,25 @@ class Model_Library extends Model_Base_Table{
 	}
 
 	function beforeSave(){
-		$this['slug_url'] = $this->normalizeSlugUrl($this['name']);
+
+		$old = $this->add('xavoc\dictionary\Model_Library');
+		$old->addCondition('name',$this['name']);
+		$old->addCondition('id','<>',$this->id);
+		$old->tryLoadAny();
+		if($old->loaded()){
+			throw $this->exception('name already exists','ValidityCheck')
+			->setField('name');
+		}
+
+		$old = $this->add('xavoc\dictionary\Model_Library');
+		$old->addCondition('slug_url',$this['slug_url']);
+		$old->addCondition('id','<>',$this->id);
+		$old->tryLoadAny();
+		if($old->loaded()){
+			throw $this->exception('slug_url already exists','ValidityCheck')
+			->setField('slug_url');
+		}
+
 	}
 
 	function deactive(){

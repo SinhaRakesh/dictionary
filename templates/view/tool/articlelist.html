@@ -1,0 +1,30 @@
+
+<div id="{$_name}" style="{$style}" class="{$class} ">{rows}{row}
+  <div class="col-md-4 member_area col-sm-12 col-lg-4 col-xs-12">
+    <div data-wow-delay="0.3s" class="member animated wow fadeIn">
+      <div class="member_img"><img src="{image}websites/pathshala/www/img/latest_news/1.jpg{/}" alt="{$name}" style="width:100%;"/>
+        <div class="date">
+          <h2>{day}12{/}</h2>
+          <h6>{month}jun{/}</h6>
+        </div>
+        <div class="hover_content">
+          <div class="content_left">
+            <h6>Posted by</h6><span>Admin</span>
+          </div>
+          <div style="display:none;" class="content_right">
+            <h6><i class="mdi mdi-comment-processing"></i><span>8</span></h6>
+            <h6><i class="mdi mdi-heart-outline"></i><span>20</span></h6>
+          </div>
+        </div>
+      </div>
+      <div class="member_info">
+        <h4>{$name}</h4>
+        <p>{$description}</p><a href="{$read_more}">Read more</a>
+      </div>
+    </div>
+  </div>{/}{/}
+  {not_found}
+  <div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>{/}
+  {paginator_wrapper}
+  <div style="float:none; clear:both" class="xepan-commerce-item-paginator">{$Paginator}</div>{/}
+</div>

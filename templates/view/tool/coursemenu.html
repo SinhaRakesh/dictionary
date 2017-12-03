@@ -1,12 +1,15 @@
-<ul id="{$_name}" class="nav navbar-nav navbar-right {$class}" style="{$style}" >
-    {category_list}
-    {rows}{row}
-    <li class="course" aria-haspopup="true" data-id='{$id}'>
-      <a href="{$url}">
-          {$name}
-        </a>
+<div id="{$_name}" class="main_menu collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar-right " style="{$style}">
+        {category_list}
+        {rows}{row}
+        <li class="course" aria-haspopup="true" data-id='{$id}'>
+            <a href="{$url}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$name}
+            </a>
             {nested_course_wrapper}
-            {$nested_course}
+                {$nested_course}
             {/}
+        </li>
     {/}{/}
     {/category_list}
+    </ul>
+</div>

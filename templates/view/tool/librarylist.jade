@@ -1,0 +1,16 @@
+section(id='{$_name}' class="{$class} " style="{$style}")
+	.container		
+		{rows}{row}
+		h1 {$heading}
+		{$name}
+		{$description}
+		{/}{/}
+		{not_found}
+		div.full-width.alert.alert-warning(role="alert")
+			strong.glyphicon.glyphicon-warning-sign &nbsp;Warning!
+				span &nbsp;{$not_found_message}
+		{/}
+		{paginator_wrapper}
+		.xepan-commerce-item-paginator(style='float:none; clear:both')
+			{$Paginator}
+		{/}
