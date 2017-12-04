@@ -1,35 +1,42 @@
 
-<div id="{$_name}" style="{$style}" class="{$class} course_lessons">{rows}{row}
-  <div class="course_lesson_inner">
-    <h5>Q. : {$name}</h5>
-    <ul class="row">
-      <li class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-        <div class="lesson_headline">
-          <h6><span>A</span><i class="mdi mdi-chevron-right"></i>{$a}</h6>
-        </div>
-      </li>
-      <li class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-        <div class="lesson_headline">
-          <h6><span>B</span><i class="mdi mdi-chevron-right"></i>{$b}</h6>
-        </div>
-      </li>
-      <li class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-        <div class="lesson_headline">
-          <h6><span>C</span><i class="mdi mdi-chevron-right"></i>{$c}</h6>
-        </div>
-      </li>
-      <li class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-        <div class="lesson_headline">
-          <h6><span>D</span><i class="mdi mdi-chevron-right"></i>{$d}</h6>
-        </div>
-      </li>
-    </ul>
-    <div class="pathshala-answer-section">
-      <h4 style="padding-bottom:0px;" class="do-objective-answer">Answer<span class="pathshala-objective-answer">&nbsp;: {$answer}</span></h4>
-      <div class="pathshala-objective-answer description">{$description}</div>
+<section id="{$_name}" style="{$style}" class="{$class} course_area">
+  <div class="container">
+    <div class="course_inner">
+      <div class="course_single">
+        			
+        {rows}{row}
+        <div class="course_lesson_inner">
+          <h5>Q. {$s_no} : {$name}</h5>
+          <ul class="row">
+            <li class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <div class="lesson_headline">
+                <h6><span>A</span><i class="mdi mdi-chevron-right"></i>{$a}</h6>
+              </div>
+            </li>
+            <li class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <div class="lesson_headline">
+                <h6><span>B</span><i class="mdi mdi-chevron-right"></i>{$b}</h6>
+              </div>
+            </li>
+            <li class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <div class="lesson_headline">
+                <h6><span>C</span><i class="mdi mdi-chevron-right"></i>{$c}</h6>
+              </div>
+            </li>
+            <li class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <div class="lesson_headline">
+                <h6><span>D</span><i class="mdi mdi-chevron-right"></i>{$d}</h6>
+              </div>
+            </li>
+          </ul>
+          <div class="pathshala-answer-section">
+            <h4 style="padding-bottom:0px;" class="do-objective-answer">Answer<span class="pathshala-objective-answer">&nbsp;: {$answer}</span></h4>
+            <div class="pathshala-objective-answer description">{$description}</div>
+          </div>
+        </div>{/}{/}
+      </div>
     </div>
-  </div>{/}{/}
-  {not_found}
+  </div>{not_found}
   <div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>{/}
   {paginator_wrapper}
   <div style="float:none; clear:both" class="xepan-commerce-item-paginator">{$Paginator}</div>{/}
@@ -38,4 +45,4 @@
     	$(this).closest('.pathshala-answer-section').find('.pathshala-objective-answer').toggle();
     });
   </script>
-</div>
+</section>

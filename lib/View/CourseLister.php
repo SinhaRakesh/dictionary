@@ -12,6 +12,7 @@ class View_CourseLister extends \CompleteLister{
 		$model->addCondition([['parent_course_id',0],['parent_course_id',NULL]])
 			->addCondition('status','Active')
 			->addCondition('display_in_menu_bar',true)
+			->addCondition([['is_paper',false],['is_paper',null]])
 			;
 		$model->setOrder('display_sequence','desc');
 		
@@ -25,6 +26,7 @@ class View_CourseLister extends \CompleteLister{
 		$sub_cat->addCondition('parent_course_id',$this->model->id);
 		$sub_cat->addCondition('status',"Active");
 		$sub_cat->addCondition('display_in_menu_bar',true);
+		$sub_cat->addCondition([['is_paper',false],['is_paper',null]]);
 		$sub_cat->setOrder('display_sequence','desc');
 		
 		if($sub_cat->count()->getOne() > 0){

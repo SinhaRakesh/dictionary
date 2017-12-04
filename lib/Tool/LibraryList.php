@@ -12,7 +12,7 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			'heading'=>'Library',
 			'description'=>''
 		];
-
+	public $s_no = 1;
 	function init(){
 		parent::init();
 		if($this->owner instanceof \AbstractController) return;
@@ -21,6 +21,16 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			$this->options['type'] = "Descriptive";
 		}
 		
+		$slug = $this->app->stickyGET('slug');
+		if($slug){
+			$paper = $this->add('xavoc\dictionary\Model_Paper');
+			$paper->addCondition('slug_url',$slug);
+			$paper->tryLoadAny();
+			if($paper->loaded()){
+				$this->options['type'] = $paper['paper_type'];
+			}
+		}
+
 		$model = $this->add('xavoc\dictionary\Model_'.$this->options['type']);
 		$model->addCondition('status','Active');
 		
@@ -52,6 +62,7 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 				$g->current_row['image'] = $g->model['image'];
 			
 			$g->current_row_html['description'] = $g->model['description'];
+			$g->current_row['s_no'] = $this->s_no++;
 		});
 		
 		$cl->template->trySet('heading',$this->options['heading']);

@@ -6,8 +6,8 @@ class Model_Course extends Model_Base_Table{
 	public $table = "course";
 	public $status = ['Active','Inactive'];
 	public $actions = [
-			'Active'=>['view','deactive','edit','delete'],
-			'Inactive'=>['view','active','edit','delete']
+			'Active'=>['view','associate','deactive','edit','delete'],
+			'Inactive'=>['view','associate','active','edit','delete']
 		];
 	public $acl_type = "dictionary_course";
 
@@ -23,9 +23,47 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('slug_url');
 		$this->addField('display_in_menu_bar')->type('boolean');
 
+		$this->addField('is_paper')->type('boolean')->defaultValue(0);
+		$this->addField('paper_type')->enum(['Descriptive','Objective']);
+
 		$this->hasMany('LibraryCourseAssociation','course_id');
 		
 		// $this->add('dynamic_model/Controller_AutoCreator');
 
+		$this->addHook('beforeSave',$this);
+		$this->is([
+			'name|to_trim|required',
+			'slug_url|to_trim|required'
+		]);
 	}
+
+
+	function beforeSave(){
+
+		$old = $this->add('xavoc\dictionary\Model_Course');
+		$old->addCondition('slug_url',$this['slug_url']);
+		$old->addCondition('id','<>',$this->id);
+		$old->tryLoadAny();
+		if($old->loaded()){
+			throw $this->exception('slug_url already exists','ValidityCheck')
+			->setField('slug_url');
+		}
+
+	}
+
+	function page_associate($page){
+
+		$lca = $page->add('xavoc\dictionary\Model_LibraryCourseAssociation');
+		$lca->addCondition('course_id',$this->id);
+		$crud = $page->add('CRUD');
+		$crud->setModel($lca);
+
+		if($crud->isEditing()){
+			$form = $crud->form;
+			$form->getElement('library_id')->getModel()->addCondition('type',$this['paper_type']);
+		}
+		$crud->grid->addPaginator($ipp=30);
+		
+	}
+
 }

@@ -14,6 +14,7 @@ class Initiator extends \Controller_Addon {
 
         $m = $this->app->top_menu->addMenu('Pathshala');
         $m->addItem(['Course','icon'=>'fa fa-cog'],'xavoc_dictionary_course');
+        $m->addItem(['Paper','icon'=>'fa fa-cog'],'xavoc_dictionary_paper');
         $m->addItem(['Descriptive','icon'=>'fa fa-cog'],'xavoc_dictionary_descriptive');
         $m->addItem(['Dictionary','icon'=>'fa fa-cog'],'xavoc_dictionary_dictionary');
         $m->addItem(['Objective','icon'=>'fa fa-cog'],'xavoc_dictionary_objective');
@@ -40,6 +41,7 @@ class Initiator extends \Controller_Addon {
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_LibraryList','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_Descriptive','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_Course','Dictionary');
+        $this->app->exportFrontEndTool('xavoc\dictionary\Tool_CourseDetail','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_WordOfDay','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_MockTest','Dictionary');
         

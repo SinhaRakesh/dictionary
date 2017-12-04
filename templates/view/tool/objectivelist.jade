@@ -1,40 +1,42 @@
 
-div(id='{$_name}' class="{$class} course_lessons" style="{$style}")
-	{rows}{row}
-	.course_lesson_inner
-		h5 Q. : {$name}
-		ul.row
-			li.col-md-6.col-lg-6.col-sm-12.col-xs-12
-				.lesson_headline
-					h6
-						span A
-						i.mdi.mdi-chevron-right
-						| {$a}
-			li.col-md-6.col-lg-6.col-sm-12.col-xs-12
-				.lesson_headline
-					h6
-						span B
-						i.mdi.mdi-chevron-right
-						| {$b}
-			li.col-md-6.col-lg-6.col-sm-12.col-xs-12
-				.lesson_headline
-					h6
-						span C
-						i.mdi.mdi-chevron-right
-						| {$c}
-			li.col-md-6.col-lg-6.col-sm-12.col-xs-12
-				.lesson_headline
-					h6
-						span D
-						i.mdi.mdi-chevron-right
-						| {$d}
-		div.pathshala-answer-section
-			h4.do-objective-answer(style="padding-bottom:0px;") Answer
-				span.pathshala-objective-answer &nbsp;: {$answer}
-			div.pathshala-objective-answer.description
-				{$description}
-
-	{/}{/}
+section(id='{$_name}' class="{$class} course_area course2_area" style="{$style}")
+	.container
+		.course_inner
+			.course_single
+				{rows}{row}
+				.course_lesson_inner
+					h5 Q. {$s_no} : {$name}
+					ul.row
+						li.col-md-6.col-lg-6.col-sm-12.col-xs-12
+							.lesson_headline
+								h6
+									span A
+									i.mdi.mdi-chevron-right
+									| {$a}
+						li.col-md-6.col-lg-6.col-sm-12.col-xs-12
+							.lesson_headline
+								h6
+									span B
+									i.mdi.mdi-chevron-right
+									| {$b}
+						li.col-md-6.col-lg-6.col-sm-12.col-xs-12
+							.lesson_headline
+								h6
+									span C
+									i.mdi.mdi-chevron-right
+									| {$c}
+						li.col-md-6.col-lg-6.col-sm-12.col-xs-12
+							.lesson_headline
+								h6
+									span D
+									i.mdi.mdi-chevron-right
+									| {$d}
+					div.pathshala-answer-section
+						h4.do-objective-answer(style="padding-bottom:0px;") Answer
+							span.pathshala-objective-answer &nbsp;: {$answer}
+						div.pathshala-objective-answer.description
+							{$description}
+				{/}{/}
 	{not_found}
 	div.full-width.alert.alert-warning(role="alert")
 		strong.glyphicon.glyphicon-warning-sign &nbsp;Warning!
