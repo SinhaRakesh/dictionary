@@ -1,15 +1,31 @@
-<div id="{$_name}" class="main_menu collapse navbar-collapse">
-    <ul class="nav navbar-nav navbar-right " style="{$style}">
-        {category_list}
-        {rows}{row}
-        <li class="course" aria-haspopup="true" data-id='{$id}'>
-            <a href="{$url}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$name}
-            </a>
-            {nested_course_wrapper}
+<div id="{$_name}" class="row  {$class}" style="{$style}" >
+{category_list}
+  <ul class="sky-mega-menu sky-mega-menu-anim-scale sky-mega-menu-response-to-switcher navbar-right">
+    <li class="switcher">
+        <a href="#"> <i style="color: white" class="glyphicon glyphicon-th-list"></i></a>
+    </li>
+    {rows}{row}
+    <li class="xshop-category" aria-haspopup="true" data-id='{$id}'>
+            <a href="{$url}">
+            {$name}
+        </a>
+            {nested_category_wrapper}
+            <div class="grid-container3">
                 {$nested_course}
+            </div>
             {/}
-        </li>
+    </li>        
     {/}{/}
-    {/category_list}
-    </ul>
+</ul>
+{/category_list}
 </div>
+<style type="text/css">
+    li ul li.switcher{
+        display: none!important;
+    }
+</style>
+<script type="text/javascript">
+     $(document).ready(function() {
+        $(".grid-container3 > ul").removeClass("sky-mega-menu sky-mega-menu-anim-scale sky-mega-menu-response-to-switcher");
+     });
+</script>

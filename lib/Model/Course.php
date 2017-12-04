@@ -19,8 +19,8 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('name');
 		$this->addField('status')->enum(['Active','Inactive'])->defaultValue('Active');
 		$this->addField('page_name')->caption('course redirect to page');
-		// $this->addField('display_sequence')->type('number');
-
+		$this->addField('display_sequence')->type('number');
+		$this->addField('slug_url');
 		$this->addField('display_in_menu_bar')->type('boolean');
 
 		$this->hasMany('LibraryCourseAssociation','course_id');
