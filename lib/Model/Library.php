@@ -49,6 +49,7 @@ class Model_Library extends Model_Base_Table{
 
 		$old = $this->add('xavoc\dictionary\Model_Library');
 		$old->addCondition('name',$this['name']);
+		$old->addCondition('type',$this['type']);
 		$old->addCondition('id','<>',$this->id);
 		$old->tryLoadAny();
 		if($old->loaded()){
@@ -58,6 +59,7 @@ class Model_Library extends Model_Base_Table{
 
 		$old = $this->add('xavoc\dictionary\Model_Library');
 		$old->addCondition('slug_url',$this['slug_url']);
+		$old->addCondition('type',$this['type']);
 		$old->addCondition('id','<>',$this->id);
 		$old->tryLoadAny();
 		if($old->loaded()){
