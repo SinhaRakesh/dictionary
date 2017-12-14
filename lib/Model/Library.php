@@ -28,12 +28,18 @@ class Model_Library extends Model_Base_Table{
 		$this->addField('sentance');
 		$this->addField('synonyms');
 		$this->addField('antonyms');
+
+		$this->addField('word_of_day_on_date')->type('date');
 		// $this->addField('created_at')->type('DatePicker');
 		
 		$this->add('xepan\filestore\Field_Image','image_id')->display(['form'=>'xepan\base\Upload']);
 		$this->addField('status')->enum(['Active','Inactive'])->defaultValue('Active');
 
 		$this->hasMany('LibraryCourseAssociation','library_id');
+
+		$this->addExpression('duration')->set(function($m,$q){
+			return $q->expr('DATEDIFF([0],[1])',["'".$this->app->today."'",$m->getElement('word_of_day_on_date')]);
+		});
 
 		$this->is([
 			'name|to_trim|required',
