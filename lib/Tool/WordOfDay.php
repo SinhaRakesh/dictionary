@@ -22,6 +22,7 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 			$model->addExpression('duration2')->set(function($m,$q){
 				return $q->expr('IFNULL([0],0)',[$m->getElement('duration')]);
 			});
+			$model->addCondition([['duration2',0],['duration2','>','360']]);
 			$model->setOrder('duration2','asc');
 		}
 
@@ -37,10 +38,12 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 			if(!$model['word_of_day_on_date']){
 
 				$lib = $this->add('xavoc\dictionary\Model_Library');
-				$lib->addCondition('is_word_of_day',true)->tryLoadAny();
-				$lib['is_word_of_day'] = false;
-				$lib->save();
-
+				$lib->addCondition('is_word_of_day',true)
+					->tryLoadAny();
+				if($lib->loaded()){
+					$lib['is_word_of_day'] = false;
+					$lib->save();
+				}
 				$model['word_of_day_on_date'] = $this->app->today;
 				$model['is_word_of_day'] = true;
 				$model->save();
