@@ -19,9 +19,9 @@ div(id='{$_name}' class="{$class} " style="{$style}")
 								i(class="mdi mdi-heart-outline")
 								span 20
 				div(class="member_info")
-					h4 {$name}
-					p {$description}
-					a(href="{$read_more}") Read more
+					h4.heading {$name}
+					div.detail {$description}
+					a.readmore(href="{$read_more}") Read more
 		{/}{/}
 		{not_found}
 		div.full-width.alert.alert-warning(role="alert")
