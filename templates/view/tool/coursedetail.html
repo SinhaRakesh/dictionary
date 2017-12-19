@@ -1,18 +1,16 @@
 <section class="about_us_area xepan-component {$Class}" xepan-component-name="white heading with detail" id="{$_name}">
     <div class="container">
-        <div class="row m0 section_title animated wow fadeInUp">
-            <h2 class="xepan-component xepan-editable-text mce-content-body" xepan-component-name="Generic" id="7bab4bd1-3c35-4a27-c054-d08fa592be24" style="position: relative;" contenteditable="true">{$heading}</h2>
-            <div class="title_border">
+        {paper_list_wrapper}
+        <div class="paper-lister" style="text-align: left;">
+            {paper_list}
+            <div class="row m0 section_title animated wow fadeInUp">
+                <h2 class="xepan-component xepan-editable-text mce-content-body" xepan-component-name="Generic" id="7bab4bd1-3c35-4a27-c054-d08fa592be24" style="position: relative;" contenteditable="true">{$heading}</h2>
+                <div class="title_border">
                 <div class="icon_side">
                     <i class="mdi mdi-google-physical-web"></i>
                 </div>
             </div>
-            <h6 class="xepan-component xepan-editable-text mce-content-body" xepan-component-name="detail" id="2309bc2c-0e93-4d3f-8645-c084de0ea8fe" style="position: relative;" scrollamount="" contenteditable="true">
-                {$detail}
-            </h6>
-        </div>
-        <div class="paper-lister" style="text-align: left;">
-            {paper_list}
+            </div>           
             {rows}{row}
             <div class="list-group-item">
                 <a href="{$url}">{$name}</a>
@@ -20,5 +18,6 @@
             {/}{/}
             {/}
         </div>
+        {/}
     </div>
 </section>

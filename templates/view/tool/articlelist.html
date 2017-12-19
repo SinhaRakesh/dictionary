@@ -1,8 +1,10 @@
 
-<div id="{$_name}" style="{$style}" class="{$class} ">{rows}{row}
-  <div class="col-md-4 member_area col-sm-12 col-lg-4 col-xs-12">
+<div id="{$_name}" style="{$style}" class="{$class} ">
+  {rows}{row}
+  <div class="col-md-4 member_area col-sm-12 col-lg-4 col-xs-12" style="margin-top:40px;">
     <div data-wow-delay="0.3s" class="member animated wow fadeIn">
-      <div class="member_img"><img src="{image}websites/pathshala/www/img/latest_news/1.jpg{/}" alt="{$name}" style="width:100%;"/>
+      <div class="member_img" style="height:299px; width:100%;">
+        <img src="{image}websites/pathshala/www/img/latest_news/1.jpg{/}" alt="{$name}" style="width:100%;height:299px;"/>
         <div class="date">
           <h2>{day}12{/}</h2>
           <h6>{month}jun{/}</h6>
@@ -19,7 +21,8 @@
       </div>
       <div class="member_info">
         <h4 class="heading">{$name}</h4>
-        <div class="detail">{$description}</div><a href="{$read_more}" class="readmore">Read more</a>
+        <div class="detail" style="height: 200px;overflow: hidden;padding-bottom:20px;display: block;">{$description}</div>
+        <a href="{$read_more}" class="readmore btn btn-default" style="margin-top: 20px;">Read more</a>
       </div>
     </div>
   </div>{/}{/}

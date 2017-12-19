@@ -57,7 +57,7 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			$g->current_row['slug_url'] = $url;
 			
 			if(!strlen($g->model['image'])){
-				$g->current_row['image'] = "websites/pathshala/www/img/latest_news/1.jpg";
+				$g->current_row['image'] = "websites/".$this->app->current_website_name."/www/img/latest_news/1.jpg";
 			}else
 				$g->current_row['image'] = $g->model['image'];
 			

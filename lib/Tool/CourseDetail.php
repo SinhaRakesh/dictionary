@@ -17,21 +17,54 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 		$course->addCondition('slug_url',$slug);		
 		$course->tryLoadAny();
 		if(!$course->loaded()){
-			
 			$this->add('View')->addClass('alert alert-danger')->set('no record found');
 			return;
 		}
 
-		$this->template->trySet('heading',$course['name']);
-
 		$paper = $this->add('xavoc\dictionary\Model_Paper');
 		$paper->addCondition('parent_course_id',$course->id);
-		$list = $this->add('Lister',null,'paper_list',['view\tool\coursedetail','paper_list']);
-		$list->addHook('formatRow',function($l){
-			$l->current_row['url'] = $this->app->url($l->model['page_name'],['slug'=>$l->model['slug_url']]);
-		});
 
-		$list->setModel($paper);
+		$has_paper = 1;
+		if($paper->count()->getOne()){
+			$list = $this->add('CompleteLister',null,'paper_list',['view\tool\coursedetail','paper_list']);
+			$list->addHook('formatRow',function($l){
+				$l->current_row['url'] = $this->app->url($l->model['page_name'],['slug'=>$l->model['slug_url']]);
+			});
+			$list->setModel($paper);
+			$list->template->trySet('heading',$course['name']);
+		}else{
+			$has_paper = 0;
+		}
+
+		$model = $this->add('xavoc\dictionary\Model_Course')
+					->addCondition('parent_course_id',$course->id);
+
+		if($model->count()->getOne()){
+			foreach ($model as $m) {
+				$paper = $this->add('xavoc\dictionary\Model_Paper');
+				$paper->addCondition('parent_course_id',$m->id);
+				if(!$paper->count()->getOne()){
+					return;
+				}
+
+				$list = $this->add('CompleteLister',null,'paper_list',['view\tool\coursedetail','paper_list']);
+				$list->addHook('formatRow',function($l){
+					$l->current_row['url'] = $this->app->url($l->model['page_name'],['slug'=>$l->model['slug_url']]);
+				});
+
+				$list->setModel($paper);
+				$list->template->trySet('heading',$m['name']);
+			}
+			$has_paper = 1;
+		}else{
+			$has_paper = 0;
+		}
+
+		if($has_paper){
+			$this->add('View')
+				->set('we are uploading paper for selected subject');
+		}
+
 	}
 
 	function defaultTemplate(){
