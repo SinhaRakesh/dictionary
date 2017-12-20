@@ -20,6 +20,7 @@ class Initiator extends \Controller_Addon {
         $m->addItem(['Objective','icon'=>'fa fa-cog'],'xavoc_dictionary_objective');
         $m->addItem(['Word of day','icon'=>'fa fa-cog'],'xavoc_dictionary_wordofday');
         $m->addItem(['Article','icon'=>'fa fa-cog'],'xavoc_dictionary_article');
+        $m->addItem(['New Word From Client','icon'=>'fa fa-cog'],'xavoc_dictionary_newword');
 
         return $this;
     }
@@ -44,6 +45,7 @@ class Initiator extends \Controller_Addon {
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_CourseDetail','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_WordOfDay','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_MockTest','Dictionary');
+        $this->app->exportFrontEndTool('xavoc\dictionary\Tool_Dictionary','Dictionary');
         
         return $this;
     }
