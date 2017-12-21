@@ -51,7 +51,7 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 		}
 
 		$this->setModel($model);
-
+		$this->template->trySetHtml('description_detail',$model['description']);
 		if(!$slug)
 			$this->template->set('url',$this->app->url('word-of-day',['slug'=>$model['slug_url']]));
 	}
