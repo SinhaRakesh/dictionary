@@ -4,7 +4,7 @@ namespace xavoc\dictionary;
 
 class Tool_Search extends \xepan\cms\View_Tool{
 	public $options = [
-			'result_page'=>'course-detail'
+			'result_page'=>'paper'
 		];
 
 	function init(){
@@ -88,7 +88,7 @@ class Tool_Search extends \xepan\cms\View_Tool{
 			// $this->js()->reload(['slug_url'=>$form['search']])->execute();
 			if(!$form['search']) $form->error('search','search must not be empty');
 
-			$form->js()->redirect($this->app->url($this->options['result_page'],['slug_url'=>$form['search']]))->execute();
+			$form->js()->redirect($this->app->url($this->options['result_page'],['slug'=>$form['search']]))->execute();
 		}
 		
 	}

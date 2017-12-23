@@ -47,6 +47,7 @@ class Initiator extends \Controller_Addon {
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_MockTest','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_Dictionary','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_Search','Dictionary');
+        $this->app->exportFrontEndTool('xavoc\dictionary\Tool_New','Dictionary');
         
         return $this;
     }
