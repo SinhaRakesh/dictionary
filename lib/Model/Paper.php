@@ -12,7 +12,8 @@ class Model_Paper extends Model_Course{
 		$this->addCondition('page_name','paper');
 
 		$this->is([
-			'paper_type|to_trim|required'
+			'paper_type|to_trim|required',
+			'slug_url|to_trim|required'
 		]);
 	}
 }

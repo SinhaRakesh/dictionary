@@ -3,21 +3,28 @@
 namespace xavoc\dictionary;
 
 class Tool_Dictionary extends \xepan\cms\View_Tool{
-	public $options = [];
+	public $options = [
+			'result_page'=>null
+		];
 
 	function init(){
 		parent::init();
 		
 		if($this->owner instanceof \AbstractController) return;
-		
+		$this->app->stickyGET('search_dictionary_id');
 
 		$this->form = $form = $this->add('Form');
+		$form->add('xepan\base\Controller_FLC')
+			->addContentSpot()
+			->layout([
+				'search'=>'Dictionary Search~c1~12',
+				'FormButtons~&nbsp;'=>'c2~4'
+			]);
+
 		$search_field = $form->addField('xepan\base\DropDown','search');
 		$search_field->validate_values = false;
-		// $search_field->set(['Rakesh']);
 
 		if($_GET[$this->name.'_src_dic']){
-
 			$results = [];
 			$model_dic = $this->add('xavoc\dictionary\Model_Dictionary');
 			$model_dic->addCondition([['is_auto_added',false],['is_auto_added',null]]);
@@ -34,7 +41,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 			echo json_encode(
 				[
 					"results" => $results,
-					"more"=>false	
+					"more" => false
 				]
 				);
 			exit;
@@ -58,6 +65,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 			$m = $this->add('xavoc\dictionary\Model_Dictionary')
 					->addCondition('id',$sdid);
 			$m->tryLoadAny();
+
 			if($m->loaded()){
 				$view->setModel($m);
 				$view->template->setHtml('description_detail',$m['description']);
@@ -71,8 +79,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 			}
 		}
 
-		if($form->isSubmitted()){
-
+		if($form->isSubmitted()){					
 			if(!is_numeric($form['search'])){
 				$new = $this->add('xavoc\dictionary\Model_Dictionary');
 				$new->addCondition('name',trim($form['search']));
@@ -83,6 +90,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 				$new->save();
 			}
 
+			// $form->js()->redirect($this->app->url($this->options['result_page'],['dictionary_id'=>$form['search']]))->execute();
 			$this->js()->reload(['search_dictionary_id'=>$form['search']])->execute();
 		}
 		

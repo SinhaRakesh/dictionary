@@ -1,6 +1,7 @@
 
-<div id="{$_name}" style="{$style}" class="{$class} word-of-day"><a href="{$url}">
-    <h2>{$name}</h2></a>
-  <div>{$description_detail}</div>
+<div id="{$_name}" style="{$style}" class="{$class} word-of-day">
+	<a href="{$url}"><h2>{$name}</h2></a>
+	{img_wrapper}<img class="word-of-day-image" src="{$image_url}"/>{/}
+  	<div class="word-of-detail">{$description_detail}</div>
   {$Content}
 </div>

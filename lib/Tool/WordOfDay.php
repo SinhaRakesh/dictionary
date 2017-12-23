@@ -4,6 +4,8 @@ namespace xavoc\dictionary;
 
 class Tool_WordOfDay extends \xepan\cms\View_Tool{
 	public $options = [
+			'show_image'=>false,
+			'detail_page'=>'word-of-day'
 		];
 
 	function init(){
@@ -49,11 +51,20 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 				$model->save();
 			}
 		}
-
+		
 		$this->setModel($model);
 		$this->template->trySetHtml('description_detail',$model['description']);
-		if(!$slug)
-			$this->template->set('url',$this->app->url('word-of-day',['slug'=>$model['slug_url']]));
+
+		$this->template->set('url',$this->app->url($this->options['detail_page'],['slug'=>$model['slug_url']]));
+
+		if(!$this->options['show_image']){
+			$this->template->tryDel('img_wrapper');
+		}else{
+			// if($model['image'])
+			// 	$this->template->set('image_url',$model['image']);
+			// else
+				$this->template->set('image_url',"websites/".$this->app->current_website_name."/www/img/word_of_day_default.jpg");
+		}
 	}
 
 	function defaultTemplate(){

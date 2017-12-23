@@ -26,29 +26,37 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('is_paper')->type('boolean')->defaultValue(0);
 		$this->addField('paper_type')->enum(['Descriptive','Objective']);
 
+		$this->addField('description')->type('text');
+
 		$this->hasMany('LibraryCourseAssociation','course_id');
 		
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('beforeSave',$this);
 		$this->is([
-			'name|to_trim|required',
-			'slug_url|to_trim|required'
+			'name|to_trim|required'
 		]);
 	}
 
 
 	function beforeSave(){
 
-		$old = $this->add('xavoc\dictionary\Model_Course');
-		$old->addCondition('slug_url',$this['slug_url']);
-		$old->addCondition('id','<>',$this->id);
-		$old->tryLoadAny();
-		if($old->loaded()){
-			throw $this->exception('slug_url already exists','ValidityCheck')
-			->setField('slug_url');
+		if($this['parent_course_id'] && !$this['slug_url']){
+			throw $this->exception('slug url must not be empty','ValidityCheck')->setField('slug_url');
 		}
 
+		if($this['slug_url']){
+			$this['slug_url'] = $this->app->normalizeSlugUrl($this['slug_url']);
+
+			$old = $this->add('xavoc\dictionary\Model_Course');
+			$old->addCondition('slug_url',$this['slug_url']);
+			$old->addCondition('id','<>',$this->id);
+			$old->tryLoadAny();
+			if($old->loaded()){
+				throw $this->exception('slug_url already exists, '.$this['slug_url'],'ValidityCheck')
+				->setField('slug_url');
+			}
+		}
 	}
 
 	function page_associate($page){
