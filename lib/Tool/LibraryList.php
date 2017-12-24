@@ -5,7 +5,9 @@ namespace xavoc\dictionary;
 class Tool_LibraryList extends \xepan\cms\View_Tool{
 	public $options = [
 			'type'=>'Descriptive',
+			'paper_type'=>'Descriptive',
 			'order'=>'desc',
+			'show_paginator'=>true,
 			'paginator'=>'8',
 			'detailpage'=>'detail',
 			'limit'=>0,
@@ -33,7 +35,10 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 
 		$model = $this->add('xavoc\dictionary\Model_'.$this->options['type']);
 		$model->addCondition('status','Active');
-		
+		if($this->options['paper_type'] && $this->options['type'] == "Paper"){
+			$model->addCondition('paper_type',$this->options['paper_type']);
+		}
+
 		$model->setOrder('id',$this->options['order']?:'desc');
 		if($this->options['limit'])
 			$model->setLimit($this->options['limit']);
@@ -49,11 +54,13 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		if($this->options['paginator']){
 			$paginator = $cl->add('Paginator',['ipp'=>$this->options['paginator']]);
 			$paginator->setRowsPerPage($this->options['paginator']);
+		}else{
+			$cl->template->tryDel('paginator_wrapper');
 		}
 		
 		$cl->addHook('formatRow',function($g){
-			$url = $this->api->url($this->options['detailpage']."/".$g->model['slug_url']);
-			$url->arguments = [];
+			$url = $this->api->url($this->options['detailpage'],['slug'=>$g->model['slug_url']]);
+						
 			$g->current_row['slug_url'] = $url;
 			
 			if(!strlen($g->model['image'])){
