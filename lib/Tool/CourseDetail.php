@@ -32,6 +32,13 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 			});
 			$list->setModel($paper);
 			$list->template->trySet('heading',$course['name']);
+
+			if($paper->count()->getOne() > 20){
+					$paginator = $list->add('paginator',['ipp'=>20]);
+					$paginator->setRowsPerPage(20);
+			}else{
+				$list->template->tryDel('paginator_wrapper');
+			}
 		}else{
 			$has_paper = 0;
 		}
@@ -54,6 +61,13 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 
 				$list->setModel($paper);
 				$list->template->trySet('heading',$m['name']);
+
+				if($paper->count()->getOne() > 20){
+					$paginator = $list->add('paginator',['ipp'=>20]);
+					$paginator->setRowsPerPage(20);
+				}else{
+					$list->template->tryDel('paginator_wrapper');
+				}
 			}
 			$has_paper = 1;
 		}else{

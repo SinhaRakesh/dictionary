@@ -8,6 +8,7 @@ class page_test extends \Page{
 	function init(){
 		parent::init();
 
+		$this->add('xavoc\dictionary\View_CourseFooter');
 		$crud = $this->add('CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Dictionary');
 		$crud->setModel($model);

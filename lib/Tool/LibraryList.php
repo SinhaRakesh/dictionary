@@ -15,6 +15,7 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			'description'=>''
 		];
 	public $s_no = 1;
+	public $add_paper_cloud = false;
 	function init(){
 		parent::init();
 		if($this->owner instanceof \AbstractController) return;
@@ -30,7 +31,11 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			$paper->tryLoadAny();
 			if($paper->loaded()){
 				$this->options['type'] = $paper['paper_type'];
+				$this->options['heading'] = $paper['name'];
+				$this->add_paper_cloud = true;
 			}
+
+
 		}
 
 		$model = $this->add('xavoc\dictionary\Model_'.$this->options['type']);
@@ -76,6 +81,13 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		$cl->template->trySet('heading_description',$this->options['description']);
 
 		// $cl->add('xepan\cms\Controller_Tool_Optionhelper',['options'=>$this->options,'model'=>$model]);
+		if($this->add_paper_cloud){
+			$type = 'Objective';
+			if($paper['paper_type'] == "Objective")
+				$type = "Descriptive";
+
+			$cl->add('xavoc\dictionary\View_PaperCloud',['type'=>$type],'paper_cloud');
+		}	
 	}
 
 
