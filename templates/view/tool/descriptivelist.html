@@ -24,11 +24,15 @@
             <div class="detail">{$description}</div>
           </div>
         </div>
-      </div>{/}{/}
+      </div>
+      {/}{/}
       {not_found}
       <div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>{/}
       {paginator_wrapper}
       <div style="float:none; clear:both" class="xepan-commerce-item-paginator">{$Paginator}</div>{/}
+      <div class="container">
+        {$paper_cloud}
+      </div>      
     </div>
   </div>
 </section>

@@ -48,6 +48,7 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		if($this->options['limit'])
 			$model->setLimit($this->options['limit']);
 		
+		
 		$this->complete_lister = $cl = $this->add('CompleteLister',null,null,['view/tool/'.strtolower($this->options['type'])."list"]);
 		$cl->setModel($model);
 		
@@ -85,9 +86,9 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			$type = 'Objective';
 			if($paper['paper_type'] == "Objective")
 				$type = "Descriptive";
-
+			
 			$cl->add('xavoc\dictionary\View_PaperCloud',['type'=>$type],'paper_cloud');
-		}	
+		}
 	}
 
 
