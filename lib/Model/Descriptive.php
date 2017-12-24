@@ -15,5 +15,7 @@ class Model_Descriptive extends Model_Library{
 		$this->getElement('c')->destroy();
 		$this->getElement('d')->destroy();
 		$this->getElement('answer')->destroy();
+
+		$this->getElement('description')->display(array('form'=>'xepan\base\RichText'));
 	}
 }

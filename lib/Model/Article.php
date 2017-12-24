@@ -23,5 +23,6 @@ class Model_Article extends Model_Library{
 		$this->addExpression('day')->set('DAY(created_at)');
 		$this->addExpression('month')->set('DATE_FORMAT(created_at,"%b")');
 		
+		$this->getElement('description')->display(array('form'=>'xepan\base\RichText'));
 	}
 }

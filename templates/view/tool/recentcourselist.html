@@ -1,0 +1,32 @@
+<div id="{$_name}" style="{$style}" class="{$class} new_course popular_course">
+	<h4 class="course_title">लोकप्रिय क्वेश्चन सेट </h4>
+	{rows}
+	{row}
+	<div class="media">
+        <div class="media-left" style="width:67;height: 67;">
+            <a href="#">
+               <img class="media-object" src="{$image}" alt="#" style="width: 67px;height: 67px;">
+            </a>
+        </div>
+        <div class="media-body">
+            <h6>{$name}</h6>
+            <p>{$parent_course}</p>
+            <p>{$description}</p>
+            <ul class="feedback">
+                <li><i class="fa fa-star active"></i></li>
+                <li><i class="fa fa-star active"></i></li>
+                <li><i class="fa fa-star active"></i></li>
+                <li><i class="fa fa-star active"></i></li>
+                <li><i class="fa fa-star"></i></li>
+            </ul>
+        </div>
+    </div>
+	{/}
+	{/}
+	{not_found}
+    	<div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>
+    {/}
+    {paginator_wrapper}
+    	<div style="float:none; clear:both" class="">{$Paginator}</div>
+    {/}
+</div>

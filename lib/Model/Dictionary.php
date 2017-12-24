@@ -3,7 +3,7 @@
 namespace xavoc\dictionary;
 
 class Model_Dictionary extends Model_Library{
-
+	
 	function init(){
 		parent::init();
 
@@ -15,5 +15,6 @@ class Model_Dictionary extends Model_Library{
 		$this->getElement('c')->destroy();
 		$this->getElement('d')->destroy();
 		$this->getElement('answer')->destroy();
+		
 	}
 }

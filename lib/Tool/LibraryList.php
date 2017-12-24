@@ -12,7 +12,8 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			'detailpage'=>'detail',
 			'limit'=>0,
 			'heading'=>'Library',
-			'description'=>''
+			'description'=>'',
+			'customlayout'=>''
 		];
 	public $s_no = 1;
 	public $add_paper_cloud = false;
@@ -35,7 +36,6 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 				$this->add_paper_cloud = true;
 			}
 
-
 		}
 
 		$model = $this->add('xavoc\dictionary\Model_'.$this->options['type']);
@@ -48,9 +48,18 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		if($this->options['limit'])
 			$model->setLimit($this->options['limit']);
 		
+		$template = $this->options['type'];
+		if($this->options['customlayout']) 
+			$template = $this->options['customlayout'];
+
+		if($this->options['type'] == "Descriptive" && $this->add_paper_cloud)
+			$template .= "detail";
+		else
+			$template .= "list";
 		
-		$this->complete_lister = $cl = $this->add('CompleteLister',null,null,['view/tool/'.strtolower($this->options['type'])."list"]);
+		$this->complete_lister = $cl = $this->add('CompleteLister',null,null,['view/tool/'.strtolower($template)]);
 		$cl->setModel($model);
+		
 		
 		if(!$model->count()->getOne())
 			$cl->template->set('not_found_message','No Record Found');

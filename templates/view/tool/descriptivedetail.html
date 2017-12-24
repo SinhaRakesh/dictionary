@@ -1,0 +1,35 @@
+
+<section id="{$_name}" style="{$style}" class="{$class} course_area">
+  <div class="container">
+    <div class="row m0 section_title">
+      <h2>{$heading}</h2>
+      <div class="title_border">
+        <div class="icon_side"><i class="mdi mdi-google-physical-web"></i></div>
+      </div>
+    </div>
+    <div class="course_inner">
+      <div class="course_single row">
+        {rows}{row}
+        <div class="course_lesson_inner col-md-12 col-sm-12 col-lg-12">
+          <h5>Q. {$s_no} : {$name}</h5>
+          <div class="pathshala-answer-section">
+            <h4 class="do-objective-answer">उत्तर: <span class="pathshala-objective-answer">&nbsp; {$description}</span></h4>
+          </div>
+        </div>{/}{/}
+      </div>
+    </div>
+  {not_found}
+  <div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>{/}
+  {paginator_wrapper}
+  <div style="float:none; clear:both" class="xepan-commerce-item-paginator">{$Paginator}</div>{/}
+  </div>
+  <div class="container" style="margin-top: 20px;">
+  {$paper_cloud}
+  {$Content}
+  </div>  
+  <script>
+    $('.do-objective-answer').click(function(){
+      $(this).closest('.pathshala-answer-section').find('.pathshala-objective-answer').toggle();
+    });
+  </script>
+</section>

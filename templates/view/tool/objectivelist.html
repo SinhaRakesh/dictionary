@@ -1,15 +1,19 @@
 
-<section id="{$_name}" style="{$style}" class="{$class} course_area">
+<section id="{$_name}" style="{$style}" class="{$class} course_area course2_area">
   <div class="container">
+
     <div class="row m0 section_title">
       <h2>{$heading}</h2>
       <div class="title_border">
         <div class="icon_side"><i class="mdi mdi-google-physical-web"></i></div>
       </div>
     </div>
+
     <div class="course_inner">
+      <div class="course_lessons">
       <div class="course_single row">
         {rows}{row}
+
         <div class="course_lesson_inner col-md-6 col-sm-12 col-lg-6">
           <h5>Q. {$s_no} : {$name}</h5>
           <ul class="row">
@@ -40,6 +44,7 @@
           </div>
         </div>{/}{/}
       </div>
+    </div>
     </div>
   {not_found}
   <div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>{/}

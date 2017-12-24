@@ -5,4 +5,12 @@
   	<div class="word-of-detail">{$description_detail}</div>
   	{read_more_button}<a class="btn btn-primary" href="{$url}">आगे पढे</a>{/}
   {$Content}
+
+  {recent_words}
+  	<div class="top bar course info pathshala-recent-words">
+  	{rows}{row}
+  		<a class="btn btn-info btn-large custom_hover" style="padding: 10px 30px;margin-bottom: 5px;" href="{$slug_url}">{$name}</a>
+  	{/}{/}
+  </div>
+  {/}
 </div>

@@ -14,7 +14,8 @@ class Model_Library extends Model_Base_Table{
 		parent::init();
 
 		$this->addField('name');
-		$this->addField('description')->type('text')->display(array('form'=>'xepan\base\RichText'));
+		$this->addField('description')->type('text');
+		
 		$this->addField('type')->enum(['Descriptive','Dictionary','Objective','Article']);
 		$this->addField('a');
 		$this->addField('b');

@@ -59,12 +59,26 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 
 		if(!$this->options['show_image']){
 			$this->template->tryDel('img_wrapper');
+			$this->template->tryDel('recent_words');
 		}else{
 			// if($model['image'])
 			// 	$this->template->set('image_url',$model['image']);
 			// else
-				$this->template->tryDel('read_more_button');
-				$this->template->set('image_url',"websites/".$this->app->current_website_name."/www/img/word_of_day_default.jpg");
+			$this->template->tryDel('read_more_button');
+			$this->template->set('image_url',"websites/".$this->app->current_website_name."/www/img/word_of_day_default.jpg");
+
+			$l = $this->add('CompleteLister',null,'recent_words',['view/tool/wordofday','recent_words']);
+			$m = $this->add('xavoc\dictionary\Model_Dictionary');
+			$m->addCondition('id','<>',$model['id']);
+			$m->setOrder('id','desc');
+			$m->setLimit(20);
+			$l->setModel($m);
+
+			$l->addHook('formatRow',function($g){
+				$g->current_row['slug_url'] = $this->app->url('englishword',['slug'=>$g->model['slug_url']]);
+			});
+			
+
 		}
 	}
 

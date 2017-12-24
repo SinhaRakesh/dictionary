@@ -1,0 +1,25 @@
+<div class="course_single" id="{$_name}" style="{$style}">
+    <div class="course_describe">
+        <h3>{$name}</h3>
+        <ul class="nav">
+            <li><a href="#"><i class="mdi mdi-calendar-clock"></i>Post <span>{$created_at}</span></a></li>
+        </ul>
+        <img src="{$image_url}" alt="{$name}" style="width: 100%;">
+    </div>
+    <div class="course_details">
+        <h3>Detail</h3>
+        <div style="text-align: justify;">
+            {$description_detail}        
+        </div>
+    </div>
+    <hr/>
+    <div class="popular_tags popular_course" style="padding-bottom: 20px;">
+        <div class="tag_inner">
+           {$next}
+           {$previous}
+        </div>
+    </div>
+    <div>
+        {$Content}
+    </div>
+</div>

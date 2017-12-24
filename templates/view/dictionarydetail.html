@@ -1,39 +1,51 @@
 <section class="about_us_area {$Class}" id="{$_name}" style="{$style}">
-		
-    <div class="container">
+    <div class="container" style="width: 80%;">
         {detail_wrapper}
         <div class="paper-lister" style="text-align: left;">
             <div class="row m0 section_title animated wow fadeInUp">
                 <h2 class="xepan-component xepan-editable-text mce-content-body" xepan-component-name="Generic" id="7bab4bd1-3c35-4a27-c054-d08fa592be24" style="position: relative;" contenteditable="true">{$name}</h2>
                 <div class="title_border">
-                	<div class="icon_side">
-                    	<i class="mdi mdi-google-physical-web"></i>
-                	</div>
-            	</div>
+                    <div class="icon_side">
+                        <i class="mdi mdi-google-physical-web"></i>
+                    </div>
+                </div>
+                <div class="description" style="float: left;font-size:20px; ">
+                    <strong>Meaning of <span style="text-transform: capitalize;">{$name}</span> in hindi</strong>
+                </div>
             </div>
-            <p>
-            	{$description_detail}
-            </p>
-  			{sentance_wrapper}   
-            <div>
-            	<h4>Sentance</h4>{$sentance}
+            <div class="row" style="margin-bottom: 10px;">
+                {description_detail}
+                {rows}{row}
+                <div class="col-md-6" style="margin-top: 10px;font-size: 16px;"><i class="fa fa-check"></i>&nbsp;{$name}</div>
+                {/}{/}
+                {/}
             </div>
-            {/}
 
             {synonyms_wrapper}
-            	<div>
-            		<h4>synonyms</h4>{$synonyms}
-            	</div>
+                <div>
+                    <h4>Synonyms for <span style="text-transform: capitalize;"> {$name} </span> :-</h4>
+                    <div style="margin-left:20px;padding: 10px;font-size: 16px;">{$synonyms}</div>
+                </div>
             {/}
 
             {antonyms_wrapper}
-            	<div>
-            		<h4>antonyms</h4>{$antonyms}
+                <div>
+                    <h4>Antonyms for <span style="text-transform: capitalize;"> {$name} </span> :-</h4>
+                    <div style="margin-left:20px;padding: 10px;font-size: 16px;">{$antonyms}</div>
+                </div>
+            {/}
+
+            {sentance_wrapper}   
+            <div>
+                <h4>Sentance for <span style="text-transform: capitalize;"> {$name}</span> </h4>
+                <div class="sentance-list">
+                    {$sentancelist}
+                </div>
             </div>
             {/}
 
         </div>
         {/}
-        {$Content}
     </div>
+    {$Content}
 </section>
