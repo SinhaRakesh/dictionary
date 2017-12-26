@@ -16,5 +16,20 @@ class Model_Dictionary extends Model_Library{
 		$this->getElement('d')->destroy();
 		$this->getElement('answer')->destroy();
 		
+		$this->addHook('beforeSave',$this);
 	}
+
+	function beforeSave(){
+
+		$old = $this->add('xavoc\dictionary\Model_Dictionary');
+		$old->addCondition('part_of_speech_id',$this['part_of_speech_id']);
+		$old->addCondition('name',$this['name']);
+		$old->addCondition('id','<>',$this->id);
+		$old->tryLoadAny();
+		if($old->loaded()){
+			throw $this->exception('name already exists','ValidityCheck')->setField('name');
+		}
+
+	}
+
 }

@@ -9,13 +9,11 @@ class page_wordofday extends \xepan\base\Page{
 		
 
 		$c = $this->add('xepan\base\CRUD',['allow_add'=>false,'allow_del'=>false]);
-		$c->grid->add('View',null,'heading')->addClass('alert alert-success')->set("Current Word of Day");
-		$model = $this->add('xavoc\dictionary\Model_Library')
+		$model = $this->add('xavoc\dictionary\Model_Dictionary')
 					->addCondition('status','Active')
 					;
-		$model->debug();
 		$model->setOrder('is_word_of_day','desc');
-		$c->setModel($model,['name','type','is_word_of_day','duration']);
+		$c->setModel($model,['part_of_speech_id','name','speech','description','slug_url','sentance','synonyms','antonyms','is_word_of_day','duration','word_of_day_on_date','image_id'],['name','type','is_word_of_day','duration','word_of_day_on_date']);
 		$c->grid->addQuickSearch(['name']);
 		$c->grid->addPaginator($ipp=50);
 

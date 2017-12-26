@@ -10,7 +10,12 @@ class page_course extends \xepan\base\Page{
 
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Course');
-		$crud->setModel($model);
+		$model->addCondition('is_paper',false);
+		$crud->setModel($model,['parent_course_id','name','page_name','display_sequence','slug_url','display_in_menu_bar','description','keyword'],['name','parent_course','slug_url','status','action']);
 
+		$crud->grid->removeAttachment();
+
+		$crud->grid->addPaginator($ipp=25);
+		$crud->grid->addQuickSearch(['name']);
 	}
 }

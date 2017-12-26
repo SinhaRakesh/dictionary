@@ -13,6 +13,8 @@ class Model_Library extends Model_Base_Table{
 	function init(){
 		parent::init();
 
+		$this->hasOne('xavoc\dictionary\Model_PartOfSpeech','part_of_speech_id');
+
 		$this->addField('name');
 		$this->addField('description')->type('text');
 		
@@ -26,7 +28,7 @@ class Model_Library extends Model_Base_Table{
 		$this->addField('created_at')->type('dateTime')->defaultValue($this->app->now)->system(true);
 		$this->addField('slug_url');
 		$this->addField('is_word_of_day')->type('boolean')->defaultValue(0);
-		$this->addField('sentance');
+		$this->addField('sentance')->type('text');
 		$this->addField('synonyms');
 		$this->addField('antonyms');
 
@@ -50,7 +52,7 @@ class Model_Library extends Model_Base_Table{
 		]);
 
 		$this->addHook('beforeSave',$this);
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function beforeSave(){

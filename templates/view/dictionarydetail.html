@@ -9,36 +9,40 @@
                         <i class="mdi mdi-google-physical-web"></i>
                     </div>
                 </div>
-                <div class="description" style="float: left;font-size:20px; ">
+                <div class="part-of-speech color-theme-blue" style="float: left;font-size: 20px;text-transform: capitalize; ">{ {$part_of_speech} }</div>
+                <div class="description" style="clear:both;float: left;font-size:24px; ">
                     <strong>Meaning of <span style="text-transform: capitalize;">{$name}</span> in hindi</strong>
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px;">
                 {description_detail}
                 {rows}{row}
-                <div class="col-md-6" style="margin-top: 10px;font-size: 16px;"><i class="fa fa-check"></i>&nbsp;{$name}</div>
+                <div class="col-md-6" style="margin-top: 10px;font-size: 18px;"><i class="fa fa-check"></i>&nbsp;{$name}</div>
                 {/}{/}
                 {/}
             </div>
 
             {synonyms_wrapper}
+                <hr/>
                 <div>
-                    <h4>Synonyms for <span style="text-transform: capitalize;"> {$name} </span> :-</h4>
-                    <div style="margin-left:20px;padding: 10px;font-size: 16px;">{$synonyms}</div>
+                    <h3 class="color-theme-info">Synonyms for <span style="text-transform: capitalize;"> {$name} </span> :-</h3>
+                    <div style="margin-left:20px;padding: 10px;font-size: 18px;">{$synonyms}</div>
                 </div>
             {/}
 
             {antonyms_wrapper}
+                <hr/>
                 <div>
-                    <h4>Antonyms for <span style="text-transform: capitalize;"> {$name} </span> :-</h4>
-                    <div style="margin-left:20px;padding: 10px;font-size: 16px;">{$antonyms}</div>
+                    <h3 class="color-theme-info">Antonyms for <span style="text-transform: capitalize;"> {$name} </span> :-</h3>
+                    <div style="margin-left:20px;padding: 10px;font-size: 18px;">{$antonyms}</div>
                 </div>
             {/}
 
             {sentance_wrapper}   
+            <hr/>
             <div>
-                <h4>Sentance for <span style="text-transform: capitalize;"> {$name}</span> </h4>
-                <div class="sentance-list">
+                <h3 class="color-theme-info">Sentance for <span style="text-transform: capitalize;"> {$name}</span> </h3>
+                <div class="sentance-list" style="font-size: 18px;">
                     {$sentancelist}
                 </div>
             </div>

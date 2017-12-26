@@ -11,6 +11,9 @@ class page_paper extends \xepan\base\Page{
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Paper');
 		$crud->setModel($model);
+		$crud->grid->addHook('formatRow',function($g){
+			$g->current_row_html['image'] = '<img style="width:100px;" src="'.$g->model['image'].'" />';
+		});
 
 		if($crud->isEditing()){
 			$form = $crud->form;
@@ -21,5 +24,8 @@ class page_paper extends \xepan\base\Page{
 		}
 		
 		$crud->grid->removeAttachment();
+		$crud->grid->addPaginator($ipp=25);
+		$crud->grid->addQuickSearch(['name']);
+		$crud->grid->removeColumn('keyword');
 	}
 }
