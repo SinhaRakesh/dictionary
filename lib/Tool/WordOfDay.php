@@ -28,8 +28,10 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 			$model->setOrder('duration2','asc');
 		}
 
-		if($slug)
+		if($slug){
+			$model = $this->add('xavoc\dictionary\Model_Dictionary');
 			$model->addCondition('slug_url',$slug);
+		}
 
 		$model->setLimit(1);
 		$model->tryLoadAny();
@@ -56,6 +58,7 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 		$this->template->trySetHtml('description_detail',$model['description']);
 
 		$this->template->set('url',$this->app->url($this->options['detail_page'],['slug'=>$model['slug_url']]));
+		$this->template->set('word_of_day_date',date('l, F d, Y',strtotime($model['word_of_day_on_date'])));
 
 		if(!$this->options['show_image']){
 			$this->template->tryDel('img_wrapper');
@@ -77,7 +80,27 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 			$l->addHook('formatRow',function($g){
 				$g->current_row['slug_url'] = $this->app->url('englishword',['slug'=>$g->model['slug_url']]);
 			});
-			
+				
+			$model = $this->add('xavoc\dictionary\Model_Library');
+			$model->addCondition('word_of_day_on_date','<>',$this->app->today);
+			$model->addCondition('word_of_day_on_date','<>',null);
+			$model->setOrder('word_of_day_on_date','desc');
+			$model->setLimit(6);
+
+
+			$list = $this->add('CompleteLister',null,'previous_wordofday',['view/tool/wordofday','previous_wordofday']);
+			$list->setModel($model);
+			$list->addHook('formatRow',function($l){
+				if($l->model['image'])
+					$l->current_row_html['image_url'] = $l->model['image'];
+				else
+					$l->current_row_html['image_url'] = "websites/".$this->app->current_website_name."/www/img/word_of_day_default.jpg";
+				
+				$l->current_row_html['slug_url'] = $this->app->url(null,['slug'=>$l->model['slug_url']]);
+			});
+			if(!$model->count()->getOne()){
+				$list->template->tryDel('previous_heading');
+			}
 
 		}
 	}
