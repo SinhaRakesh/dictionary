@@ -88,8 +88,25 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		});
 		
 		$cl->template->trySet('heading',$this->options['heading']);
-		$cl->template->trySet('heading_description',$this->options['description']);
+		$hdetail = $this->options['description'];
 
+		if($model['type'] == "Objective"){
+			$hdetail = '<div class="row description-detail">';
+			$hdetail .= '<div class="col-md-3">';
+			$hdetail .= '</div>';
+			$hdetail .= '<div class="col-md-6 heading-middle">';
+			$hdetail .= '<p>प्रश्नो के उत्तर के लिए उत्तर पर क्लिक करें </p>';
+			$hdetail .= '</div>';
+			$hdetail .= '<div class="col-md-3 heading-left">';
+			$hdetail .= 'published on: '.$model['created_at'];
+			$hdetail .= '</div>';
+			$hdetail .= '</div>';
+
+			$cl->template->trySetHtml('heading_description',$hdetail);
+
+		}else{
+			$cl->template->trySet('heading_description',$this->options['description']);
+		}
 		// $cl->add('xepan\cms\Controller_Tool_Optionhelper',['options'=>$this->options,'model'=>$model]);
 		if($this->add_paper_cloud){
 			$type = 'Objective';
