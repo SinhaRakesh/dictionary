@@ -9,7 +9,7 @@ class page_objective extends \xepan\base\Page{
 
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Objective');
-		$crud->setModel($model,['name','description','a','b','c','d','answer','display_order','status'],['name','answer','display_order','status']);
+		$crud->setModel($model,['name','description','a','b','c','d','answer','display_order','status'],['name','answer','display_order','course_association','status']);
 		
 		$crud->grid->removeColumn('status');
 		$crud->grid->addQuickSearch(['name']);

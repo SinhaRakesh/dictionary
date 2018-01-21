@@ -14,7 +14,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 		parent::init();
 		
 		if($this->owner instanceof \AbstractController) return;
-		$this->app->stickyGET('search_dictionary_id');
+		$search_dictionary_id = $this->app->stickyGET('search_dictionary_id');
 
 		$this->addClass('path-dictinary-searchtool');
 		$this->form = $form = $this->add('Form')->addClass('pathshala-dictionary-search');
@@ -28,6 +28,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 		$search_field = $form->addField('xepan\base\DropDown','search');
 		$search_field->validate_values = false;
 		$button_set = $this->add('View')->setStyle('margin-bottom','20px;');
+		$search_field->validate('required');
 
 		if($_GET[$this->name.'_src_dic']){
 			$results = [];
@@ -66,9 +67,10 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 		$form->addSubmit('Search')->addClass('btn btn-sm path-btn selected');
 
 		$name = $_GET['word'];
-		if(($sdid = $_GET['search_dictionary_id'] || $name) && $this->options['show_detail']){
+		if(( ($sdid = $search_dictionary_id) || $name) && $this->options['show_detail']){
 			$view = $this->add('View',null,null,['view/dictionarydetail']);
 			$m = $this->add('xavoc\dictionary\Model_Dictionary');
+			
 			if($name)
 				$m->addCondition('name',$name);
 			else

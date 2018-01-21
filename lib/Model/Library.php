@@ -39,10 +39,16 @@ class Model_Library extends Model_Base_Table{
 		$this->add('xepan\filestore\Field_Image','image_id')->display(['form'=>'xepan\base\Upload']);
 		$this->addField('status')->enum(['Active','Inactive'])->defaultValue('Active');
 
-		$this->hasMany('LibraryCourseAssociation','library_id');
+		$this->hasMany('xavoc\dictionary\LibraryCourseAssociation','library_id');
 
 		$this->addExpression('duration')->set(function($m,$q){
 			return $q->expr('DATEDIFF([0],[1])',["'".$this->app->today."'",$m->getElement('word_of_day_on_date')]);
+		});
+
+		$this->addExpression('course_association')->set(function($m,$q){
+			$asso = $m->add('xavoc\dictionary\Model_LibraryCourseAssociation');
+			$asso->addCondition('library_id',$m->getElement('id'));
+			return $q->expr('[0]',[$asso->count()]);
 		});
 
 		$this->is([
@@ -90,10 +96,11 @@ class Model_Library extends Model_Base_Table{
 	}
 
 	function page_course_association($page){
-		$f = $page->add('Form');
-		$course_field = $f->addField('xepan\base\DropDown','course');
-		$course_field->addClass('multiselect-full-width')
-					->setAttr(['multiple'=>'multiple']);
+		
+		$asso = $this->add('xavoc\dictionary\Model_LibraryCourseAssociation');
+		$asso->addCondition('library_id',$this->id);
+		$crud = $page->add('CRUD');
+		$crud->setModel($asso);
 		
 	}
 }

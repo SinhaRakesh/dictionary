@@ -19,9 +19,14 @@
           </div>
           <div class="media-body item_body"><a href="{$slug_url}" class="media-heading">{$name}</a>
             <ul class="nav">
-              <li><a href="{$slug_url}"><i class="fa fa-clock-o"></i><span>{$created_at}</span></a></li>
+              <li>
+                  <a href="{$slug_url}"><i class="fa fa-clock-o"></i><span>{$created_at}</span></a>
+                  <a href="{$slug_url}"><i class="fa fa-book"></i><span>{$parent_course}</span></a>
+              </li>
             </ul>
-            <div class="detail"><h3>{$parent_course}</h3></div>
+            <div class="detail maxline">
+                {$description}
+            </div>
           </div>
         </div>
       </div>{/}{/}

@@ -10,9 +10,9 @@
           <h6>{month}jun{/}</h6>
         </div>
         <div class="hover_content">
-          <!-- <div class="content_left">
-            <h6>Posted by</h6><span>Admin</span>
-          </div> -->
+          <div class="" style="font-weight: bold;">
+            <a href="{$slug_url}" style="color: black;"><span style="width:100%;">{$name}</span></a>
+          </div>
           <div style="display:none;" class="content_right">
             <h6><i class="mdi mdi-comment-processing"></i><span>8</span></h6>
             <h6><i class="mdi mdi-heart-outline"></i><span>20</span></h6>
@@ -20,9 +20,9 @@
         </div>
       </div>
       <div class="member_info">
-        <h4 class="heading">{$name}</h4>
+        <h4 class="heading"><a href="{$slug_url}" style="font-size: 18px;">{$name}</a></h4>
         <div class="detail" style="height: 200px;overflow: hidden;padding-bottom:20px;display: block;">{$description}</div>
-        <a href="{$slug_url}" class="readmore btn btn-default" style="margin-top: 20px;">आगे पढे</a>
+        <a href="{$slug_url}" class="readmore btn btn-info" style="margin-top: 20px;color: white;">आगे पढे</a>
       </div>
     </div>
   </div>{/}{/}

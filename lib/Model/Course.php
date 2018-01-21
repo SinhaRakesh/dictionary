@@ -6,8 +6,8 @@ class Model_Course extends Model_Base_Table{
 	public $table = "course";
 	public $status = ['Active','Inactive'];
 	public $actions = [
-			'Active'=>['view','associate','deactive','edit','delete'],
-			'Inactive'=>['view','associate','active','edit','delete']
+			'Active'=>['view','deactive','edit','delete','manage_question'],
+			'Inactive'=>['view','active','edit','delete','manage_question']
 		];
 	public $acl_type = "dictionary_course";
 
@@ -19,7 +19,7 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('name');
 		$this->addField('status')->enum(['Active','Inactive'])->defaultValue('Active');
 		$this->addField('page_name')->caption('course redirect to page');
-		$this->addField('display_sequence')->type('number')->hint('descending order');
+		$this->addField('display_sequence')->type('number')->hint('descending order')->defaultValue(0);
 		$this->addField('slug_url');
 		$this->addField('display_in_menu_bar')->type('boolean');
 
@@ -76,4 +76,8 @@ class Model_Course extends Model_Base_Table{
 		
 	}
 
+	function manage_question(){
+		$this->app->redirect($this->app->url('xavoc/dictionary/managequestion',['paper_id'=>$this->id]));
+
+	}
 }
