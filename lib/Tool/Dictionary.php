@@ -14,7 +14,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 		parent::init();
 		
 		if($this->owner instanceof \AbstractController) return;
-		$search_dictionary_id = $this->app->stickyGET('search_dictionary_id');
+		$search_dictionary_id = $_GET['search_dictionary_id'];
 
 		$this->addClass('path-dictinary-searchtool');
 		$this->form = $form = $this->add('Form')->addClass('pathshala-dictionary-search');
@@ -48,8 +48,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 				[
 					"results" => $results,
 					"more" => false
-				]
-				);
+				]);
 			exit;
 		}
 
@@ -80,12 +79,50 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 			if($m->loaded()){
 				$view->setModel($m);
 
+				if($m['part_of_speech_id']){
+					$view->template->trySet('part_of_speech_text',"{ ".$m['part_of_speech']." }");
+				}
+
 				$lister = $view->add('Lister',null,'description_detail',['view/dictionarydetail','description_detail']);
 				$lister->setSource(explode(',',$m['description']));
 				// $view->template->setHtml('description_detail',$m['description']);
 
-				if(!$m['antonyms']) $view->template->tryDel('antonyms_wrapper');
-				if(!$m['synonyms']) $view->template->tryDel('synonyms_wrapper');
+				if(!$m['antonyms']){
+					$view->template->tryDel('antonyms_wrapper');
+				}else{
+					$t_array = explode(",", $m['antonyms']);
+					$list = [];
+					foreach ($t_array as $key => $value) {
+						$list[$value] = $value;
+					}
+					$d_temp = $this->add('xavoc\dictionary\Model_Dictionary');
+					$d_temp->addCondition('name',$list);
+					foreach ($d_temp as $temp) {
+						if(isset($list[$temp['name']]))
+							$list[$temp['name']] = '<a href="'.$this->app->url(null,['word'=>$temp['name']]).'">'.$temp['name'].'</a>';
+					}
+					$list_string = implode(",", $list);
+					$view->template->setHtml('antonyms_list',$list_string);
+				}
+
+				if(!$m['synonyms']){
+					$view->template->tryDel('synonyms_wrapper');
+				} else{
+					$t_array = explode(",", $m['synonyms']);
+					$list = [];
+					foreach ($t_array as $key => $value) {
+						$list[$value] = $value;
+					}
+					$d_temp = $this->add('xavoc\dictionary\Model_Dictionary');
+					$d_temp->addCondition('name',$list);
+					foreach ($d_temp as $temp) {
+						if(isset($list[$temp['name']]))
+							$list[$temp['name']] = '<a href="'.$this->app->url(null,['word'=>$temp['name']]).'">'.$temp['name'].'</a>';
+					}
+					$list_string = implode(",", $list);
+					$view->template->setHtml('synonyms_list',$list_string);
+				}
+
 				if(!$m['sentance']) $view->template->tryDel('sentance_wrapper');
 
 				$list = explode(':',$m['sentance']);
@@ -108,10 +145,10 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 			}
 
 			$l = $this->add('CompleteLister',null,null,['view/tool/wordofday','recent_words']);
-			$m = $this->add('xavoc\dictionary\Model_Dictionary');
-			$m->setOrder('id','desc');
-			$m->setLimit(20);
-			$l->setModel($m);
+			$model = $this->add('xavoc\dictionary\Model_Dictionary');
+			$model->setOrder('id','desc');
+			$model->setLimit(20);
+			$l->setModel($model);
 
 			$l->addHook('formatRow',function($g){
 				$g->current_row['slug_url'] = $this->app->url('englishword',['slug'=>$g->model['slug_url']]);
@@ -135,14 +172,14 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 			}
 
 			if($this->options['show_detail']){
-				$this->js()->reload(['search_dictionary_id'=>$form['search']])->execute();
+				$this->app->redirect($this->app->url(null,['search_dictionary_id'=>$form['search']]))->execute();
+				// $this->js()->reload(['search_dictionary_id'=>$form['search']])->execute();
 			}else{
 				$form->js()->redirect($this->app->url($this->options['result_page'],['dictionary_id'=>$form['search']]))->execute();
 			}
 		}
 		
 		if($this->options['show_abcd_search_bar']){
-
 			$button_set->add('Button')->addClass('letter-button')->setHtml('<strong>A</strong>')->addClass('btn btn-info custom_hover')->js('click')->univ()->redirect($this->app->url($this->options['abcd_list_page'],['letter'=>'A']));
 			$button_set->add('Button')->addClass('letter-button')->setHtml('<strong>B</strong>')->addClass('btn btn-info custom_hover')->js('click')->univ()->redirect($this->app->url($this->options['abcd_list_page'],['letter'=>'B']));
 			$button_set->add('Button')->addClass('letter-button')->setHtml('<strong>c</strong>')->addClass('btn btn-info custom_hover')->js('click')->univ()->redirect($this->app->url($this->options['abcd_list_page'],['letter'=>'C']));
@@ -171,13 +208,33 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 			$button_set->add('Button')->addClass('letter-button')->setHtml('<strong>Z</strong>')->addClass('btn btn-info custom_hover')->js('click')->univ()->redirect($this->app->url($this->options['abcd_list_page'],['letter'=>'Z']));
 		}
 
+		$this->add('View')->setHtml('h1')->addClass('heading')->setHtml('<p>लोकप्रिय शब्द</p>');
+		$l = $this->add('CompleteLister',null,null,['view/tool/wordofday','recent_words']);
+		$m = $this->add('xavoc\dictionary\Model_Dictionary');
+		$m->addCondition('is_popular',true);
+		$m->setOrder('id','desc');
+		$m->setLimit(20);
+		$l->setModel($m);		
+		$l->addHook('formatRow',function($g){
+			$g->current_row['slug_url'] = $this->app->url('englishword',['slug'=>$g->model['slug_url']]);
+			$g->current_row['extra_class'] = "btn-danger";
+		});
+
+
+		$m = $this->add('xavoc\dictionary\Model_Dictionary');
+		$m->addCondition([['is_popular',false],['is_popular',null]]);
+		$m->setOrder('id','desc');
+		if($m->count()->getOne()){
+			$m->setLimit(20);
+
+			$this->add('View')->setHtml('h1')->addClass('heading')->setHtml('<p>नवीनतम शब्द</p>');
+			$l = $this->add('CompleteLister',null,null,['view/tool/wordofday','recent_words']);
+			$l->setModel($m);
+			$l->addHook('formatRow',function($g){
+				$g->current_row['slug_url'] = $this->app->url('englishword',['slug'=>$g->model['slug_url']]);
+				$g->current_row['extra_class'] = "btn-success";
+			});
+		}
+
 	}
-
-	// function recursiveRender(){
-	// 	parent::recursiveRender();
-	// 	if($this->form->isSubmitted()){
-			
-	// 	}
-	// }
-
 }
