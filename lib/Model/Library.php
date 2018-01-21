@@ -35,6 +35,7 @@ class Model_Library extends Model_Base_Table{
 		$this->addField('word_of_day_on_date')->type('date');
 		// $this->addField('created_at')->type('DatePicker');
 		$this->addField('is_auto_added')->type('boolean')->defaultValue(false);
+		$this->addField('is_popular')->type('boolean')->defaultValue(false);
 
 		$this->add('xepan\filestore\Field_Image','image_id')->display(['form'=>'xepan\base\Upload']);
 		$this->addField('status')->enum(['Active','Inactive'])->defaultValue('Active');

@@ -13,7 +13,10 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			'limit'=>0,
 			'heading'=>'Library',
 			'description'=>'',
-			'customlayout'=>''
+			'customlayout'=>'',
+			'random_record'=>false,
+			'condition_field'=>null,
+			'condition_check_value'=>true,
 		];
 	public $s_no = 1;
 	public $add_paper_cloud = false;
@@ -44,7 +47,15 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			$model->addCondition('paper_type',$this->options['paper_type']);
 		}
 
-		$model->setOrder('id',$this->options['order']?:'desc');
+		if($this->options['condition_field'] and $this->options['condition_check_value']){
+			$model->addCondition($this->options['condition_field'],$this->options['condition_check_value']);
+		}
+
+		if($this->options['random_record']){
+			// todo
+		}else
+			$model->setOrder('id',$this->options['order']?:'desc');
+
 		if($this->options['limit'])
 			$model->setLimit($this->options['limit']);
 		
