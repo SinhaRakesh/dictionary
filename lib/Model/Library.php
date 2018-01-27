@@ -58,7 +58,6 @@ class Model_Library extends Model_Base_Table{
 		$this->is([
 			'name|to_trim|required',
 			'type|to_trim|required',
-			'slug_url|to_trim|required',
 		]);
 
 		$this->addHook('beforeSave',$this);
@@ -66,7 +65,7 @@ class Model_Library extends Model_Base_Table{
 	}
 
 	function beforeSave(){
-
+		
 		$old = $this->add('xavoc\dictionary\Model_Library');
 		$old->addCondition('name',$this['name']);
 		$old->addCondition('type',$this['type']);

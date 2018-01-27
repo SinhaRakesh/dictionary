@@ -1,7 +1,7 @@
 <?php
 namespace xavoc\dictionary;
 
-class Model_Objective extends Model_Library{
+class Model_Objective extends \xavoc\dictionary\Model_Library{
 
 	function init(){
 		parent::init();

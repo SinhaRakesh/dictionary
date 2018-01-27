@@ -90,7 +90,7 @@ class page_managequestion extends \xepan\base\Page{
 		$join = $record->join('library_course_association.library_id');
 		$join->addField('course_id');
 		$record->addCondition('course_id',$paper_id);
-
+		$record->setOrder('id','desc');
 		if($course['paper_type'] == "Objective")
 			$crud->setModel($record,['name','status','display_order','a','b','c','d','answer','description'],['name','answer','status','action']);
 		else
