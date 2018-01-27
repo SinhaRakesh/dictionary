@@ -9,6 +9,7 @@ class page_article extends \xepan\base\Page{
 
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Article');
+		$model->setOrder('id','desc');
 		$crud->setModel($model,['name','description','display_order','slug_url','image_id','image','status','is_popular','keyword','keyword_description'],['name','description','display_order','slug_url','image','status','is_popular']);
 
 		$crud->grid->addHook('formatRow',function($g){

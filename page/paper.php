@@ -10,6 +10,7 @@ class page_paper extends \xepan\base\Page{
 
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Paper');
+		$model->setOrder('id','desc');
 		$crud->setModel($model);
 		$crud->grid->addHook('formatRow',function($g){
 			$g->current_row_html['image'] = '<img style="width:100px;" src="'.$g->model['image'].'" />';

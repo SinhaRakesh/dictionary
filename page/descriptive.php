@@ -10,6 +10,7 @@ class page_descriptive extends \xepan\base\Page{
 
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Descriptive');
+		$model->setOrder('id','desc');
 		$crud->setModel($model,['name','description','display_order','status','action'],['name','slug_url','status','action']);
 		
 		$crud->grid->removeAttachment();

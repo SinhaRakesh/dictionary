@@ -56,11 +56,10 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		if($this->options['condition_field'] and $this->options['condition_check_value']){
 			$model->addCondition($this->options['condition_field'],$this->options['condition_check_value']);
 		}
-
-
-		if($this->options['random_record']){
-			// todo
-		}else
+		
+		// if($this->options['random_record']){
+		// 	// todo
+		// }else
 			$model->setOrder('id',$this->options['order']?:'desc');
 
 		if($this->options['limit'])

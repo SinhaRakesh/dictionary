@@ -9,6 +9,8 @@ class page_objective extends \xepan\base\Page{
 
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Objective');
+		$model->setOrder('id','desc');
+		
 		$crud->setModel($model,['name','description','a','b','c','d','answer','display_order','status'],['name','answer','display_order','course_association','status']);
 		
 		$crud->grid->removeColumn('status');

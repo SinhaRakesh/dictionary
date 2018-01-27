@@ -4,14 +4,14 @@
 	{row}
 	<div class="media">
         <div class="media-left" style="width:67;height: 67;">
-            <a href="#">
+            <a href="{$slug_url}">
                <img class="media-object" src="{$image}" alt="#" style="width: 67px;height: 67px;">
             </a>
         </div>
         <div class="media-body">
-            <h6>{$name}</h6>
+            <a href="{$slug_url}"><h6>{$name}</h6></a>
             <p>{$parent_course}</p>
-            <p>{$description}</p>
+            <!-- <div>{$description}</div> -->
             <ul class="feedback">
                 <li><i class="fa fa-star active"></i></li>
                 <li><i class="fa fa-star active"></i></li>

@@ -12,6 +12,7 @@ class Tool_WordList extends \xepan\cms\View_Tool{
 		
 		if($this->owner instanceof \AbstractController) return;
 		
+		$this->addClass('wordlist');
 		$m = $this->add('xavoc\dictionary\Model_Dictionary');
 		$m->addCondition('status','Active');
 		$m->addCondition('name','LIKE',strtolower($_GET['letter'])."%");

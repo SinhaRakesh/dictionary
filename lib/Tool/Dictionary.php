@@ -65,7 +65,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 
 		$form->addSubmit('Search')->addClass('btn btn-sm path-btn selected');
 
-		$name = $_GET['word'];
+		$name = $_GET['word']?:$_GET['slug'];
 		if(( ($sdid = $search_dictionary_id) || $name) && $this->options['show_detail']){
 			$view = $this->add('View',null,null,['view/dictionarydetail']);
 			$m = $this->add('xavoc\dictionary\Model_Dictionary');
@@ -172,7 +172,11 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 			}
 
 			if($this->options['show_detail']){
-				$this->app->redirect($this->app->url(null,['search_dictionary_id'=>$form['search']]))->execute();
+				$t = $this->add('xavoc\dictionary\Model_Dictionary');
+				$t->addCondition('id',$form['search']);
+				$t->tryLoadAny();
+
+				$this->app->redirect($this->app->url(null,['slug'=>$t['slug_url']]))->execute();
 				// $this->js()->reload(['search_dictionary_id'=>$form['search']])->execute();
 			}else{
 				$form->js()->redirect($this->app->url($this->options['result_page'],['dictionary_id'=>$form['search']]))->execute();
