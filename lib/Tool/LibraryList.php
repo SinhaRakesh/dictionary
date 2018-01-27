@@ -38,10 +38,16 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 				$this->options['heading'] = $paper['name'];
 				$this->add_paper_cloud = true;
 			}
-
 		}
 
 		$model = $this->add('xavoc\dictionary\Model_'.$this->options['type']);
+		// paper condition
+		if(isset($paper) AND $paper->loaded()){
+			$join = $model->join('library_course_association.library_id');
+			$join->addField('course_id');
+			$model->addCondition('course_id',$paper->id);
+		}
+		
 		$model->addCondition('status','Active');
 		if($this->options['paper_type'] && $this->options['type'] == "Paper"){
 			$model->addCondition('paper_type',$this->options['paper_type']);
@@ -50,6 +56,7 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		if($this->options['condition_field'] and $this->options['condition_check_value']){
 			$model->addCondition($this->options['condition_field'],$this->options['condition_check_value']);
 		}
+
 
 		if($this->options['random_record']){
 			// todo
