@@ -31,12 +31,12 @@ class View_CourseFooter extends \CompleteLister{
 	
 	function formatRow(){
 
-		if($this->model['page_name'])
-			if($this->model['slug_url'])
+		if($this->model['page_name']){
+			if($this->model['slug_url']){
 				$this->current_row_html['url'] = $this->app->url($this->model['page_name'],['slug'=>$this['slug_url']]);
-			else
-				$this->current_row_html['url'] = $this->app->url($this->model['page_name']);
-		else
+			}else
+				$this->current_row_html['url'] = $this->app->url($this->model['page_name']);	
+		}else
 			$this->current_row_html['url'] = "";
 
 		parent::formatRow();

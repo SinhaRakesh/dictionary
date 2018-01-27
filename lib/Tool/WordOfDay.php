@@ -63,6 +63,8 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 		if(!$this->options['show_image']){
 			$this->template->tryDel('img_wrapper');
 			$this->template->tryDel('recent_words');
+			$this->template->tryDel('previous_wordofday');
+			
 		}else{
 			// if($model['image'])
 			// 	$this->template->set('image_url',$model['image']);
@@ -80,13 +82,12 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 			$l->addHook('formatRow',function($g){
 				$g->current_row['slug_url'] = $this->app->url('englishword',['slug'=>$g->model['slug_url']]);
 			});
-				
+			
 			$model = $this->add('xavoc\dictionary\Model_Library');
 			$model->addCondition('word_of_day_on_date','<>',$this->app->today);
 			$model->addCondition('word_of_day_on_date','<>',null);
 			$model->setOrder('word_of_day_on_date','desc');
 			$model->setLimit(6);
-
 
 			$list = $this->add('CompleteLister',null,'previous_wordofday',['view/tool/wordofday','previous_wordofday']);
 			$list->setModel($model);
