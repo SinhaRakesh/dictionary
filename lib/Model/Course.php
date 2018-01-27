@@ -24,6 +24,7 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('display_in_menu_bar')->type('boolean');
 
 		$this->addField('is_paper')->type('boolean')->defaultValue(0);
+		$this->addField('is_mock_paper')->type('boolean')->defaultValue(0);
 		$this->addField('paper_type')->enum(['Descriptive','Objective']);
 
 		$this->addField('description')->type('text');
@@ -32,7 +33,7 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('created_at')->type('datetime')->defaultValue($this->app->now);
 		$this->hasMany('LibraryCourseAssociation','course_id');
 		
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('beforeSave',$this);
 		$this->is([

@@ -39,12 +39,14 @@ class View_CourseLister extends \CompleteLister{
 			$this->current_row_html['nested_course'] = "";
 		}
 
-		if($this->model['page_name'])
+		if($this->model['page_name']){
 			if($this->model['slug_url'])
 				$this->current_row_html['url'] = $this->app->url($this->model['page_name'],['slug'=>$this['slug_url']]);
-			else
+			else{
+				$this->app->stickyForget('slug');
 				$this->current_row_html['url'] = $this->app->url($this->model['page_name']);
-		else
+			}			
+		}else
 			$this->current_row_html['url'] = "";
 
 		parent::formatRow();

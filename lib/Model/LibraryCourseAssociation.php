@@ -10,7 +10,9 @@ class Model_LibraryCourseAssociation extends Model_Base_Table{
 		$this->hasOne('xavoc\dictionary\Course','course_id');
 		$this->hasOne('xavoc\dictionary\Library','library_id');
 		
-		
+		$this->addExpression('course_slug_url')->set(function($m,$q){
+			return $q->expr('[0]',[$m->refSQl('course_id')->fieldQuery('slug_url')]);
+		});
 		$this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('beforeSave',$this);

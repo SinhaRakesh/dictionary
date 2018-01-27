@@ -14,7 +14,7 @@
             <div class="row">
             {rows}{row}
             <div class="col-md-6 col-sm-12 col-lg-6">
-                <div class="list-group-item">
+                <div class="list-group-item {$paper_type} custom_hover">
                     <a href="{$url}">{$name}</a>
                 </div>
             </div>
@@ -26,4 +26,5 @@
         </div>
         {/}
     </div>
+    {$Content}
 </section>

@@ -52,6 +52,9 @@ class Model_Library extends Model_Base_Table{
 			return $q->expr('[0]',[$asso->count()]);
 		});
 
+		$this->addField('keyword')->type('text');
+		$this->addField('keyword_description')->type('text');
+
 		$this->is([
 			'name|to_trim|required',
 			'type|to_trim|required',

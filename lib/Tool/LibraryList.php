@@ -67,10 +67,9 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			$template .= "detail";
 		else
 			$template .= "list";
-		
+						
 		$this->complete_lister = $cl = $this->add('CompleteLister',null,null,['view/tool/'.strtolower($template)]);
 		$cl->setModel($model);
-		
 		
 		if(!$model->count()->getOne())
 			$cl->template->set('not_found_message','No Record Found');
@@ -100,8 +99,9 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		
 		$cl->template->trySet('heading',$this->options['heading']);
 		$hdetail = $this->options['description'];
-
-		if($model['type'] == "Objective"){
+		
+		if($model['type'] == "Objective" || $model['type'] == "Descriptive"){
+			
 			$hdetail = '<div class="row description-detail">';
 			$hdetail .= '<div class="col-md-3">';
 			$hdetail .= '</div>';
@@ -109,7 +109,7 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			$hdetail .= '<p>प्रश्नो के उत्तर के लिए उत्तर पर क्लिक करें </p>';
 			$hdetail .= '</div>';
 			$hdetail .= '<div class="col-md-3 heading-left">';
-			$hdetail .= 'published on: '.$model['created_at'];
+			$hdetail .= 'Published on: '.$model['created_at'];
 			$hdetail .= '</div>';
 			$hdetail .= '</div>';
 

@@ -22,8 +22,9 @@ class Tool_Search extends \xepan\cms\View_Tool{
 			]);
 
 		$model =$this->add('xavoc\dictionary\Model_Paper');
-		$search_field = $form->addField('xepan\base\Basic','search');
-		$search_field->setModel($model);
+		$search_field = $form->addField('Line','search');
+		// $search_field = $form->addField('xepan\base\Basic','search');
+		// $search_field->setModel($model);
 
 		// if($_GET[$this->name.'_src_paper']){
 		// 	$results = [];

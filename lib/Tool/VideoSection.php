@@ -17,16 +17,18 @@ class Tool_VideoSection extends \xepan\cms\View_Tool{
 
 
 		$student = $this->add('xavoc\dictionary\Model_Student');
-		$this->template->trySet('student_count',(($student->count()->getOne()?:35)+1000));
+		$this->template->trySet('student_count',(($student->count()->getOne()?:35)+10000));
 
 		// paper_count
-		$paper = $this->add('xavoc\dictionary\Model_Course');
-		$paper->addCondition('is_paper',true);
+		$paper = $this->add('xavoc\dictionary\Model_Library')->addCondition('type',['Descriptive','Objective']);
 		$this->template->trySet('paper_count',$paper->count()->getOne());
 
 		// mock_test_count
+		$paper = $this->add('xavoc\dictionary\Model_Course');
+		$paper->addCondition('is_paper',true);
+		$paper->addCondition('is_mock_paper',true);
 		$this->template->trySet('mock_test_count',$paper->count()->getOne());
-
+		
 	}
 
 	function defaultTemplate(){
