@@ -93,7 +93,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 					$t_array = explode(",", $m['antonyms']);
 					$list = [];
 					foreach ($t_array as $key => $value) {
-						$list[$value] = $value;
+						$list[trim($value)] = trim($value);
 					}
 					$d_temp = $this->add('xavoc\dictionary\Model_Dictionary');
 					$d_temp->addCondition('name',$list);
@@ -101,7 +101,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 						if(isset($list[$temp['name']]))
 							$list[$temp['name']] = '<a href="'.$this->app->url(null,['word'=>$temp['name']]).'">'.$temp['name'].'</a>';
 					}
-					$list_string = implode(",", $list);
+					$list_string = implode(", ", $list);
 					$view->template->setHtml('antonyms_list',$list_string);
 				}
 
@@ -111,7 +111,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 					$t_array = explode(",", $m['synonyms']);
 					$list = [];
 					foreach ($t_array as $key => $value) {
-						$list[$value] = $value;
+						$list[trim($value)] = trim($value);
 					}
 					$d_temp = $this->add('xavoc\dictionary\Model_Dictionary');
 					$d_temp->addCondition('name',$list);
@@ -119,7 +119,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 						if(isset($list[$temp['name']]))
 							$list[$temp['name']] = '<a href="'.$this->app->url(null,['word'=>$temp['name']]).'">'.$temp['name'].'</a>';
 					}
-					$list_string = implode(",", $list);
+					$list_string = implode(", ", $list);
 					$view->template->setHtml('synonyms_list',$list_string);
 				}
 

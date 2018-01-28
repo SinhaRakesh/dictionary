@@ -8,7 +8,7 @@ class Model_Library extends Model_Base_Table{
 	public $actions = [
 				'Active'=>['view','course_association','deactive','edit','delete'],
 				'Inactive'=>['view','active','edit','delete']
-				];
+			];
 
 	function init(){
 		parent::init();
@@ -50,6 +50,14 @@ class Model_Library extends Model_Base_Table{
 			$asso = $m->add('xavoc\dictionary\Model_LibraryCourseAssociation');
 			$asso->addCondition('library_id',$m->getElement('id'));
 			return $q->expr('[0]',[$asso->count()]);
+		});
+
+		$this->addExpression('course_str')->set(function($m,$q){
+			$asso = $m->add('xavoc\dictionary\Model_LibraryCourseAssociation');
+			$asso->addCondition('library_id',$m->getElement('id'));
+			return $asso->_dsql()
+					->del('fields')
+					->field($q->expr('group_concat([0] SEPARATOR ",")',[$asso->getElement('course')]));
 		});
 
 		$this->addField('keyword')->type('text');

@@ -59,8 +59,11 @@ class page_managequestion extends \xepan\base\Page{
 			$form->addField('answer')->validate('required');
 		}
 
+		if($course['paper_type'] == "Descriptive")
+			$form->addField('text','description');
+		else
+			$form->addField('xepan\base\RichText','description');
 
-		$form->addField('xepan\base\RichText','description');
 		$form->addSubmit('Add')->addClass('btn btn-primary');
 
 		if($form->isSubmitted()){
@@ -86,7 +89,11 @@ class page_managequestion extends \xepan\base\Page{
 			$form->js(null,[$form->js()->reload(),$crud->js()->reload()])->univ()->successMessage('Question Added Successfully')->execute();
 		}
 
-		$record = $this->add('xavoc\dictionary\Model_Objective');
+		if($course['paper_type'] == "Descriptive"){
+			$record = $this->add('xavoc\dictionary\Model_Descriptive');
+		}else
+			$record = $this->add('xavoc\dictionary\Model_Objective');
+
 		$join = $record->join('library_course_association.library_id');
 		$join->addField('course_id');
 		$record->addCondition('course_id',$paper_id);

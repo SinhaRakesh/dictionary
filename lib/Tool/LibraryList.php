@@ -43,6 +43,7 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		$model = $this->add('xavoc\dictionary\Model_'.$this->options['type']);
 		// paper condition
 		if(isset($paper) AND $paper->loaded()){
+			$model = $this->add('xavoc\dictionary\Model_Library');
 			$join = $model->join('library_course_association.library_id');
 			$join->addField('course_id');
 			$model->addCondition('course_id',$paper->id);
@@ -106,16 +107,21 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		$cl->template->trySet('heading',$this->options['heading']);
 		$hdetail = $this->options['description'];
 		
-		if($model['type'] == "Objective" || $model['type'] == "Descriptive"){
+		if($this->options['type'] == "Objective" || $this->options['type'] == "Descriptive"){
 			
 			$hdetail = '<div class="row description-detail">';
-			$hdetail .= '<div class="col-md-3">';
+			if(isset($paper) and $paper->loaded()){
+				$hdetail .= '<div class="col-md-3 heading-middle">';
+				$hdetail .= '<p>'.$paper['parent_course'].'</p>';
+			}else{
+				$hdetail .= '<div class="col-md-3 ">';
+			}
 			$hdetail .= '</div>';
 			$hdetail .= '<div class="col-md-6 heading-middle">';
 			$hdetail .= '<p>प्रश्नो के उत्तर के लिए उत्तर पर क्लिक करें </p>';
 			$hdetail .= '</div>';
-			$hdetail .= '<div class="col-md-3 heading-left">';
-			$hdetail .= 'Published on: '.$model['created_at'];
+			$hdetail .= '<div class="col-md-3 heading-middle">';
+			$hdetail .= '<p> Published on: '.$model['created_at'].'</p>';
 			$hdetail .= '</div>';
 			$hdetail .= '</div>';
 

@@ -14,9 +14,17 @@
         <div class="course_lesson_inner col-md-12 col-sm-12 col-lg-12">
           <h5>Q. {$s_no} : {$name}</h5>
           <div class="pathshala-answer-section">
-            <h4 class="do-objective-answer">उत्तर: <span class="pathshala-objective-answer">&nbsp; {$description}</span></h4>
-          </div>
-        </div>{/}{/}
+            <table class='do-objective-answer'>
+              <tr>
+                <td valign="top">उत्तर: </td>
+                <td valign="top">
+                  <div class="pathshala-objective-answer">&nbsp; {$description}</div>
+                </td>
+              </tr>
+            </table>
+            </div>
+        </div>
+        {/}{/}
       </div>
     </div>
   {not_found}
