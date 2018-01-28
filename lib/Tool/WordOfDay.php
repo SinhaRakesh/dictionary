@@ -66,11 +66,27 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 			$this->template->tryDel('previous_wordofday');
 			
 		}else{
-			// if($model['image'])
-			// 	$this->template->set('image_url',$model['image']);
-			// else
+
 			$this->template->tryDel('read_more_button');
-			$this->template->set('image_url',"websites/".$this->app->current_website_name."/www/img/word_of_day_default.jpg");
+			if($model['image'])
+				$this->template->set('image_url',$model['image']);
+			else
+				$this->template->set('image_url',"websites/".$this->app->current_website_name."/www/img/word_of_day_default.jpg");
+
+			if(!$model['sentance']){	
+				$view->template->tryDel('sentance_wrapper');
+			}else{
+				$list = explode(':',$model['sentance']);
+				$shtml = "";
+				foreach ($list as $key => $name) {
+					$shtml .= '<div style="margin-left:20px;padding: 10px;font-size: 16px;"><span class="fa">'.($key+1).'. </span>'.$name.'</div>';
+				}
+				if(count($list)){
+					$this->add('View',null,'sentancelist')->setHtml($shtml);
+				}
+				
+			}
+
 
 			$l = $this->add('CompleteLister',null,'recent_words',['view/tool/wordofday','recent_words']);
 			$m = $this->add('xavoc\dictionary\Model_Dictionary');

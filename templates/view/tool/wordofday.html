@@ -4,13 +4,25 @@
   {img_wrapper}<img class="word-of-day-image" src="{$image_url}"/>{/}
 
 	<a href="{$url}">
-    <h2 style="padding: 30px 0px;text-transform:capitalize;">{$name}</h2>
+    <h2 style="padding: 30px 0px;text-transform:capitalize;">Word Of Day: {$name}</h2>
   </a>
-  <div class="word-of-detail">{$description_detail}</div>
+
+  <div class="container" style="width:60%;">
+    {sentance_wrapper}
+      <div style="text-align: left;">
+          <h3 class="color-theme-info">Sentance for <span style="text-transform: capitalize;"> {$name}</span> </h3>
+          <div class="sentance-list" style="font-size: 18px;">
+              {$sentancelist}
+          </div>
+      </div>
+    {/}
+  </div>
+
+
+
   {$not_found}
   {read_more_button}<a class="btn btn-primary" href="{$url}">आगे पढे</a>{/}
   
-  {$Content}
   {recent_words}
     <h3 class="heading-box1" style="margin: 20px">नवीनतम अंग्रेजी शब्द</h3>
     <div class="top bar course info pathshala-recent-words">
@@ -19,6 +31,8 @@
     {/}{/}
   </div>
   {/}
+
+  {$Content}
 
   {previous_wordofday}
     <hr/>
