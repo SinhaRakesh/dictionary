@@ -16,10 +16,10 @@ class Initiator extends \Controller_Addon {
         $m->addItem(['Course','icon'=>'fa fa-cog'],'xavoc_dictionary_course');
         $m->addItem(['Paper','icon'=>'fa fa-cog'],'xavoc_dictionary_paper');
         $m->addItem(['Descriptive','icon'=>'fa fa-cog'],'xavoc_dictionary_descriptive');
-        $m->addItem(['Dictionary','icon'=>'fa fa-cog'],'xavoc_dictionary_dictionary');
         $m->addItem(['Objective','icon'=>'fa fa-cog'],'xavoc_dictionary_objective');
-        $m->addItem(['Word of day','icon'=>'fa fa-cog'],'xavoc_dictionary_wordofday');
         $m->addItem(['Article','icon'=>'fa fa-cog'],'xavoc_dictionary_article');
+        $m->addItem(['Dictionary','icon'=>'fa fa-cog'],'xavoc_dictionary_dictionary');
+        $m->addItem(['Word of day','icon'=>'fa fa-cog'],'xavoc_dictionary_wordofday');
         $m->addItem(['New Word From Client','icon'=>'fa fa-cog'],'xavoc_dictionary_newword');
         $m->addItem(['Part Of Speech','icon'=>'fa fa-cog'],'xavoc_dictionary_partofspeech');
 

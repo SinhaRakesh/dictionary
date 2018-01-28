@@ -10,8 +10,8 @@ class page_course extends \xepan\base\Page{
 
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Course');
-		$model->addCondition('is_paper',false);
-		$crud->setModel($model,['parent_course_id','name','page_name','display_sequence','slug_url','display_in_menu_bar','description','keyword'],['name','parent_course','slug_url','status','action']);
+		$model->addCondition([['is_paper',false],['is_paper',null]]);
+		$crud->setModel($model,['parent_course_id','name','page_name','display_sequence','slug_url','display_in_menu_bar','description','keyword'],['name','parent_course','slug_url','status','action','display_sequence']);
 
 		$crud->grid->removeAttachment();
 

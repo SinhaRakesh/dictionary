@@ -37,7 +37,7 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 		$model->tryLoadAny();
 		
 		if(!$model->loaded()){
-			$this->add('View')->set('word of day not found');
+			$this->add('View',null,'not_found')->set('word of day not found');
 		}else{
 			if(!$model['word_of_day_on_date']){
 

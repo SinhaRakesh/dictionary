@@ -19,7 +19,7 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('name');
 		$this->addField('status')->enum(['Active','Inactive'])->defaultValue('Active');
 		$this->addField('page_name')->caption('course redirect to page');
-		$this->addField('display_sequence')->type('number')->hint('descending order')->defaultValue(0);
+		$this->addField('display_sequence')->type('number')->hint('descending order')->defaultValue(0)->sortable(true);
 		$this->addField('slug_url');
 		$this->addField('display_in_menu_bar')->type('boolean');
 

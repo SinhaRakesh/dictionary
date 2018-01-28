@@ -11,6 +11,7 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 		
 		if($this->owner instanceof \AbstractController) return;
 		
+		
 		$slug = $_GET['slug'];
 		
 		$course = $this->add('xavoc\dictionary\Model_Course');
@@ -21,6 +22,12 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 			return;
 		}
 
+		$this->app->template->trySet('title',$course['name']);
+		if($course['keyword'])
+			$this->app->template->trySet('meta_keywords',$course['keyword']);
+		if($course['description'])
+			$this->app->template->trySet('meta_description',$course['description']);
+				
 		$paper = $this->add('xavoc\dictionary\Model_Paper');
 		$paper->addCondition('parent_course_id',$course->id);
 
@@ -74,7 +81,7 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 			$has_paper = 0;
 		}
 
-		if($has_paper){
+		if(!$has_paper){
 			$this->add('View')
 				->set('we are uploading paper for selected subject');
 		}

@@ -2,10 +2,17 @@
 <div id="{$_name}" style="{$style}" class="{$class} word-of-day">
   <h4 class="word-date">{$word_of_day_date}</h4>
   {img_wrapper}<img class="word-of-day-image" src="{$image_url}"/>{/}
-	<a href="{$url}"><h2 style="padding: 30px 0px;text-transform:capitalize;">{$name}</h2></a>
+
+	<a href="{$url}">
+    <h2 style="padding: 30px 0px;text-transform:capitalize;">{$name}</h2>
+  </a>
   <div class="word-of-detail">{$description_detail}</div>
+  {$not_found}
   {read_more_button}<a class="btn btn-primary" href="{$url}">आगे पढे</a>{/}
+  
+  {$Content}
   {recent_words}
+    <h3 class="heading-box1" style="margin: 20px">नवीनतम अंग्रेजी शब्द</h3>
     <div class="top bar course info pathshala-recent-words">
     {rows}{row}
       <a class="btn {extra_class}btn-info{/} btn-large custom_hover" style="padding: 10px 30px;margin-bottom: 5px;" href="{$slug_url}">{$name}</a>
@@ -13,7 +20,6 @@
   </div>
   {/}
 
-  {$Content}
   {previous_wordofday}
     <hr/>
     {previous_heading}

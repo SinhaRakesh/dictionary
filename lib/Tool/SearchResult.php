@@ -17,7 +17,8 @@ class Tool_SearchResult extends \xepan\cms\View_Tool{
 		}
 
 		$this->template->trySet('heading','पाठशाला पर खोजे गए परिणाम : '.$t);
-
+		$this->app->template->trySet('title','पाठशाला पर खोजे गए परिणाम : '.$t);
+		
 		// Paper Type
 		$model = $this->add('xavoc\dictionary\Model_Paper');
 		$model->addExpression('Relevance')

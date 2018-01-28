@@ -67,7 +67,12 @@ class page_managequestion extends \xepan\base\Page{
 		$form->addSubmit('Add')->addClass('btn btn-primary');
 
 		if($form->isSubmitted()){
-			$dic = $this->add('xavoc\dictionary\Model_Objective');
+			
+			if($course['paper_type'] == "Descriptive")
+				$dic = $this->add('xavoc\dictionary\Model_Descriptive');
+			else
+				$dic = $this->add('xavoc\dictionary\Model_Objective');
+
 			$dic['name'] = $form['name'];
 			$dic['slug_url'] = $this->app->normalizeName($form['name'])."-".$course['name'];
 			$dic['display_order'] = $form['display_order'];

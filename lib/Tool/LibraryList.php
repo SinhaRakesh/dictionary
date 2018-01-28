@@ -37,6 +37,12 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 				$this->options['type'] = $paper['paper_type'];
 				$this->options['heading'] = $paper['name'];
 				$this->add_paper_cloud = true;
+
+				$this->app->template->trySet('title',$paper['name']);
+				if($paper['keyword'])
+					$this->app->template->trySet('meta_keywords',$paper['keyword']);
+				if($paper['description'])
+					$this->app->template->trySet('meta_description',$paper['description']);
 			}
 		}
 
@@ -92,7 +98,6 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		
 		$cl->addHook('formatRow',function($g){
 			$url = $this->api->url($this->options['detailpage'],['slug'=>$g->model['slug_url']]);
-						
 			$g->current_row['slug_url'] = $url;
 			
 			if(!strlen($g->model['image'])){

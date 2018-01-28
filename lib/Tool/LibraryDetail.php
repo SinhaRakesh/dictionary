@@ -17,6 +17,13 @@ class Tool_LibraryDetail extends \xepan\cms\View_Tool{
 		$m->tryLoadAny();
 
 		$this->setModel($m);
+
+		$this->app->template->trySet('title',$m['name']);
+		if($m['keyword'])
+			$this->app->template->trySet('meta_keywords',$m['keyword']);
+		if($m['keyword_description'])
+			$this->app->template->trySet('meta_description',$m['keyword_description']);
+		
 		$this->template->trySetHTML('description_detail',$m['description']);
 		if(!strlen($m['image'])){
 			$this->template->trySet('image_url',"websites/".$this->app->current_website_name."/www/img/latest_news/1.jpg");
