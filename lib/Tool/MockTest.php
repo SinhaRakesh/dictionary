@@ -4,23 +4,32 @@ namespace xavoc\dictionary;
 
 class Tool_MockTest extends \xepan\cms\View_Tool{
 
-	public $options = [];
+	public $options = ['login_page'=>'login'];
 
 	function init(){
 		parent::init();
 		
 		$this->app->stickyGET('last_no');
+		$course = $this->app->stickyGET('course');
+		$paper_slug = $this->app->stickyGET('paper');
 
 		$this->session = $this->add('xavoc\dictionary\Model_TestSession');
 
 		if($this->owner instanceof \AbstractController) return;
 		
-		$this->paper_model = $paper_model = $this->add('xavoc\dictionary\Model_Paper')->tryLoadAny();
-		$total_question = 15;
+		if(!$this->app->auth->model->id){
+			$this->app->redirect($this->options['login_page']);
+		}
+
+		$this->paper_model = $paper_model = $this->add('xavoc\dictionary\Model_Paper');
+		// $paper_model->addCondition('slug_url',$paper_slug);
+		$paper_model->tryLoadAny();
 		
 		$this->add('View',null,'header')->setElement('h2')->set('Mock Test ');
 		$question_set = $paper_model->getQuestions();
 		$range = $question_set->count()->getOne();
+
+		$total_question = $range;
 
 		$question_set->getElement('name')->caption('Question');
 		$this->lister = $lister = $this->add('xepan\base\Grid',['paginator_class'=>'Paginator'],'question_lister',['view\grid\mock']);
@@ -57,14 +66,16 @@ class Tool_MockTest extends \xepan\cms\View_Tool{
 			$g->current_row_html['answer_form'] = $form->getHtml();
 		});
 
-		$this->lister->addPaginator(1,['range'=>$range,'template'=>'paginatormock']);
-		
-		$target_date = date('Y/m/d H:i:s',strtotime("+30 seconds", strtotime($this->app->now)));
-		$this->add('xavoc\dictionary\View_Timer',['target_date'=>"$target_date"],'timer');
-		
-		$submit_btn = $this->add('Button',null,'paper_submit_button')->set('SUBMIT PAPER')->addClass('btn btn-warning btn-block mock-submit-button');
-		if($submit_btn->isClicked()){
-			$submit_btn->js(true)->univ()->successMessage('Paper Submitted Successfully')->execute();
+		if($range){
+			$this->lister->addPaginator(1,['range'=>$range,'template'=>'paginatormock']);
+
+			$target_date = date('Y/m/d H:i:s',strtotime("+30 seconds", strtotime($this->app->now)));
+			$this->add('xavoc\dictionary\View_Timer',['target_date'=>"$target_date"],'timer');
+			
+			$submit_btn = $this->add('Button',null,'paper_submit_button')->set('SUBMIT PAPER')->addClass('btn btn-warning btn-block mock-submit-button');
+			if($submit_btn->isClicked()){
+				$submit_btn->js(true)->univ()->successMessage('Paper Submitted Successfully')->execute();
+			}			
 		}
 	}
 
