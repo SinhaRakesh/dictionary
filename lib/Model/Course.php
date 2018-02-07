@@ -29,7 +29,7 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('paper_type')->enum(['Descriptive','Objective']);
 
 		$this->addField('description')->type('text');
-		$this->add('xepan\filestore\Field_Image','image_id')->display(['form'=>'xepan\base\Upload']);
+		$this->add('xepan\filestore\Field_Image','image_id');
 		$this->addField('keyword')->type('text');
 		$this->addField('created_at')->type('datetime')->defaultValue($this->app->now);
 		$this->hasMany('LibraryCourseAssociation','course_id');

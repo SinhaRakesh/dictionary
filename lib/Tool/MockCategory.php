@@ -4,7 +4,7 @@ namespace xavoc\dictionary;
 
 class Tool_MockCategory extends \xepan\cms\View_Tool{
 
-	public $options = [];
+	public $options = ['mock-test-page'=>'mock-test'];
 
 	function init(){
 		parent::init();
@@ -19,6 +19,9 @@ class Tool_MockCategory extends \xepan\cms\View_Tool{
 		$category->setOrder(['display_sequence desc','id desc']);
 
 		$mockpaper = $category->add('xavoc\dictionary\Model_MockPaper');
+		// $mockpaper->addExpression('course_slug')->set($mockpaper->refSql('parent_course_id')->fieldQuery('slug_url'));
+		$mockpaper->getElement('parent_course_id')->getModel()->title_field = "slug_url";
+
 		$mockpaper->addCondition('status','Active');
 		$mockpaper->setOrder(['display_sequence desc','id desc']);
 
@@ -35,15 +38,9 @@ class Tool_MockCategory extends \xepan\cms\View_Tool{
 			}else
 				$g->current_row['image_path'] = './websites/'.$this->app->current_website_name."/defaultmockcategory.png";
 
-		// 	if($this->options['show_link']){
-		// 		if($g->model['custom_link']){
-		// 			$g->current_row['link'] = $g->model['custom_link'];
-		// 		}else{
-		// 			$g->current_row['link'] = $this->app->url($this->options['detail_page']);
-		// 		}
-		// 	}else
-		// 		$g->current_row['link_wrapper'] = "";
+			$g->current_row['link'] = $this->app->url($this->options['mock-test-page'],['course'=>$g->model['parent_course'],'paper'=>$g->model['slug_url']]);
 
+			$g->current_row_html['description'] = $g->model['description'];
 		});
 	}
 }

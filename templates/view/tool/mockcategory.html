@@ -17,33 +17,41 @@
       <ul class="portfolio_items">
         {$item_list}
         {item}
-        {$Content}
+
         <li class="portfolio {$parent_course_id}">
-          <div class="post_thumb">
-            <img src="{$image_path}"/>
-              <div class="portfolio-overlay">
-              <div class="">
-                {name_wrapper}
-                  <h3>{$name}</h3>
-                {/}
-                {description_wrapper}
-                <p> {$description}</p>{/}
-                {link_wrapper}
-                  <a href="{$link}" class="fancybox">
-                    <i class="fa fa-link"></i>
-                  </a>
-                {/}
+          <a href="#" data-toggle="modal" data-target="#myModal{$id}" style="background:#0cbdaa;height: 180px;width: 95%;">
+            <img src="{$image_path}" style="width: 30%; margin-top:20px;" />
+            <div style="margin-top:10px;">
+              <h3>{$name}</h3>
+              <!--<p style="color:white;">{$description}</p>-->
+            </div>
+          </a>
+          <!-- dialoge -->
+          <div class="modal fade" id="myModal{$id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">{$name}</h4>
+                </div>
+                <div class="modal-body">
+                  {$description}
+                </div>
+                <div class="modal-footer">
+                  <a type="button" class="btn btn-primary btn-block" style="display: block !important;" href="{$link}">Start Mock Test</a>
+                </div>
               </div>
             </div>
           </div>
-        </li>{/}
+        </li>
+        {/}
       </ul>
     </div>
   </div>
   <script>
     $('.portfolio_items').mixitup({
-    	targetSelector: '.portfolio',
-    	transitionSpeed: 450
+      targetSelector: '.portfolio',
+      transitionSpeed: 450
     });
     $(' a.fancybox').fancybox();
   </script>

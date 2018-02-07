@@ -11,10 +11,15 @@ class Model_MockPaper extends Model_Course{
 		$this->addCondition('is_mock_paper',true);
 		$this->addCondition('paper_type','Objective');
 
+		$this->getElement('description')->display(array('form'=>'xepan\base\RichText'));
 		$this->getElement('is_mock_category')->defaultValue(false)->system(true);
 		$this->getElement('created_at')->system(true);
 		$this->getElement('display_in_menu_bar')->system(true);
 		$this->getElement('page_name')->defaultValue('mock-test')->system(true);
+		
+		$this->is([
+			'parent_course_id|required'
+		]);
 	}
 
 
