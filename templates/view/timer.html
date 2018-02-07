@@ -1,0 +1,20 @@
+<div id="{$_name}" class="{$class}" style="{$style}">
+	{$Content}
+	<div id="{$_name}timer" class="timer-section">
+		
+	</div>
+
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$("#{$_name}timer").countdown("{$target_date}", function(event) {
+				$(this).text(
+					event.strftime('%H:%M:%S')
+				);
+
+			}).on('finish.countdown', function(event) {
+				$('.mock-submit-button').trigger('click').remove();
+				$(this).html('This Time has expired!').parent().addClass('disabled');
+			});
+		});
+	</script>
+</div>

@@ -1,0 +1,33 @@
+{paginator}
+
+<div class="atk-box-small atk-actions atk-align-center" id="{$_name}">
+    <div class="row" style="margin: 0px;">
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 mock-previous-button">
+                {prev}
+                <a  class="disabled">&laquo; Prev</a>
+                {/}
+            {first}{/}
+            {points_left}{/}
+        </div>
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 mock-next-button">
+            {points_right}{/}
+            {last}{/}
+            {next}
+                <a class="disabled">Next &raquo;</a>
+            {/}
+        </div>
+    </div>
+    <div class="paginator-all-sequence">
+    {rows}
+    {row}
+    <a data-skip="{$pn}" href="{$href}" class="itemlits {cur}ui-state-active ui-corner-all{/}">{$label}</a>{/}
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#" class="disabled">…</a>
+    <a href="#">19</a>
+    <a href="#">20</a>
+    <a href="#">21</a>
+    {/rows}
+    </div>
+</div>
+{/}

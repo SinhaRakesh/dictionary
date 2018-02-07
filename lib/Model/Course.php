@@ -25,6 +25,7 @@ class Model_Course extends Model_Base_Table{
 
 		$this->addField('is_paper')->type('boolean')->defaultValue(0);
 		$this->addField('is_mock_paper')->type('boolean')->defaultValue(0);
+		$this->addField('is_mock_category')->type('boolean')->defaultValue(0);
 		$this->addField('paper_type')->enum(['Descriptive','Objective']);
 
 		$this->addField('description')->type('text');
@@ -49,7 +50,10 @@ class Model_Course extends Model_Base_Table{
 		}
 
 		if($this['slug_url']){
-			$this['slug_url'] = $this->app->normalizeSlugUrl($this['slug_url']);
+			if($this['slug_url'])
+				$this['slug_url'] = $this->app->normalizeSlugUrl($this['slug_url']);
+			else
+				$this['slug_url'] = $this->app->normalizeSlugUrl($this['name']);
 
 			$old = $this->add('xavoc\dictionary\Model_Course');
 			$old->addCondition('slug_url',$this['slug_url']);

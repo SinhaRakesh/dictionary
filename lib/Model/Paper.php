@@ -25,4 +25,15 @@ class Model_Paper extends Model_Course{
 			'parent_course_id|required'
 		]);
 	}
+
+
+	function getQuestions(){
+		$model = $this->add('xavoc\dictionary\Model_Objective');
+		$aj = $model->join('library_course_association.library_id');
+		$aj->addField('course_id');
+		$model->addCondition('course_id',$this->id);
+		$model->setOrder('display_order','asc');
+		return $model;
+	}
+
 }
