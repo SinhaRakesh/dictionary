@@ -11,6 +11,8 @@ class Tool_MockCategory extends \xepan\cms\View_Tool{
 		
 		if($this->owner instanceof \AbstractController) return;
 
+		$this->app->forget('running_mock_test_id');
+
 		$this->js(true)->_css('gallery');
 		$this->app->jquery->addStaticInclude('jquery.mixitup.min');
 

@@ -27,6 +27,7 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('is_mock_paper')->type('boolean')->defaultValue(0);
 		$this->addField('is_mock_category')->type('boolean')->defaultValue(0);
 		$this->addField('paper_type')->enum(['Descriptive','Objective']);
+		$this->addField('mock_test_duration')->type('int')->hint('Duration in minutes');
 
 		$this->addField('description')->type('text');
 		$this->add('xepan\filestore\Field_Image','image_id');

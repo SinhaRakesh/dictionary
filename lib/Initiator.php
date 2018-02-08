@@ -24,6 +24,7 @@ class Initiator extends \Controller_Addon {
         $m->addItem(['Word of day','icon'=>'fa fa-cog'],'xavoc_dictionary_wordofday');
         $m->addItem(['New Word From Client','icon'=>'fa fa-cog'],'xavoc_dictionary_newword');
         $m->addItem(['Part Of Speech','icon'=>'fa fa-cog'],'xavoc_dictionary_partofspeech');
+        $m->addItem(['Student','icon'=>'fa fa-cog'],'xavoc_dictionary_student');
 
         return $this;
     }
