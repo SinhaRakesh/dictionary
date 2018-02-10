@@ -9,7 +9,7 @@ class page_student extends \Page{
 		parent::init();
 
 		$crud = $this->add('CRUD');
-		$crud->setModel('xavoc\dictionary\Model_Student',['first_name','last_name']);
+		$crud->setModel('xavoc\dictionary\Model_Student');
 
 		// $this->add('xavoc\dictionary\View_CourseFooter');
 		// $crud = $this->add('CRUD');

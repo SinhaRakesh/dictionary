@@ -44,9 +44,19 @@ class Initiator extends \Controller_Addon {
         ->setBaseURL('./shared/apps/xavoc/ispmanager/');
         $this->app->stickyGET('course');
         $this->app->stickyGET('paper');
+
         $this->app->addHook('login_panel_user_loggedin',function($app,$user){
-            $this->app->redirect($this->app->url('mock-test',['course'=>$_GET['course'],'paper'=>$_GET['paper']]));
+            $contact = $this->add('xepan\base\Model_Contact');
+            if($contact->loadLoggedIn('Student')){
+                if(!$_GET['paper']){
+                    $this->app->redirect($this->app->url('mock-category'));
+                }
+                $this->app->redirect($this->app->url('mock-test',['course'=>$_GET['course'],'paper'=>$_GET['paper']]));
+            }
         });
+
+        $stu = $this->add('xavoc\dictionary\Model_Student');
+        $this->app->addHook('userCreated',[$stu,'createNewStudent']);
 
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_LibraryList','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_Descriptive','Dictionary');
