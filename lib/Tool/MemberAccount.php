@@ -28,7 +28,7 @@ class Tool_MemberAccount extends \xepan\cms\View_Tool{
 		
 		$center_col->add('View')->setHtml('<div class="row section_title" style="margin-top:20px;"><h2 class="mce-content-body" style="position: relative;">Student Panel</h2><div class="title_border"><div class="icon_side"><i class="mdi mdi-google-physical-web"></i></div></div><div></div></div>');
 
-		$right_col->add('View')->set($student_model['name'])->addClass('text-center');
+		$right_col->add('View')->setHtml('<img class="profile-image" src="'.$this->student_model['image'].'"><h5>'.$student_model['name']."</h5>")->addClass('text-center');
 		$right_col->add('Button')->set('Logout')->addClass('btn btn-danger btn-block')->js('click')->univ()->redirect('logout');
 
 		$this->tab = $this->add('Tabs');
@@ -87,6 +87,8 @@ class Tool_MemberAccount extends \xepan\cms\View_Tool{
 		$grid = $tab->add('xepan\base\Grid');
 		$grid->setModel($model);
 		$grid->addPaginator(5);
+		$grid->template->tryDel('Pannel');
+
 	}
 
 	function settings(){
@@ -158,6 +160,9 @@ class Tool_MemberAccount extends \xepan\cms\View_Tool{
 		$country_field = $form->getElement('country_id');
 		$country_field->js('change',$form->js()->atk4_form('reloadField','state_id',[$this->app->url(null,['cut_object'=>$state_field->name]),'country_id'=>$country_field->js()->val()]));
 		$form->addSubmit('Update')->addClass('btn btn-primary');
+		$form->getElement('image_id')
+			->allowMultiple(1)
+			->setFormatFilesTemplate('view/fileupload');
 
 		if($form->isSubmitted()){
 			$form->save();
