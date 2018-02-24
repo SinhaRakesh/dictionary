@@ -18,7 +18,7 @@ class page_mockcategory extends \xepan\base\Page{
 		});
 		
 		$crud->grid->removeAttachment();
-		$crud->grid->addPaginator($ipp=25);
+		$crud->grid->addPaginator($ipp=10);
 		$crud->grid->addQuickSearch(['name']);
 		$crud->grid->removeColumn('keyword');
 	}

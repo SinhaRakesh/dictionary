@@ -35,7 +35,7 @@ class page_dictionary extends \xepan\base\Page{
 		$crud->grid->addQuickSearch(['name']);
 		$crud->grid->removeAttachment();
 
-		$crud->grid->addPaginator($ipp=25);
+		$crud->grid->addPaginator($ipp=10);
 
 		$form->setModel($model,['part_of_speech_id','name','status','description','slug_url','sentance','synonyms','antonyms','is_word_of_day','is_popular']);
 		if($form->issubmitted()){

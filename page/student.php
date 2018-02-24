@@ -10,7 +10,7 @@ class page_student extends \Page{
 
 		$crud = $this->add('CRUD');
 		$crud->setModel('xavoc\dictionary\Model_Student');
-
+		$crud->grid->addPaginator(10);
 		// $this->add('xavoc\dictionary\View_CourseFooter');
 		// $crud = $this->add('CRUD');
 		// $model = $this->add('xavoc\dictionary\Model_Dictionary');

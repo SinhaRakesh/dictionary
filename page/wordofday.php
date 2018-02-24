@@ -17,7 +17,7 @@ class page_wordofday extends \xepan\base\Page{
 
 		$c->setModel($model,['part_of_speech_id','name','speech','description','slug_url','sentance','synonyms','antonyms','is_word_of_day','duration','word_of_day_on_date','image_id'],['name','type','is_word_of_day','duration','word_of_day_on_date']);
 		$c->grid->addQuickSearch(['name']);
-		$c->grid->addPaginator($ipp=50);
+		$c->grid->addPaginator($ipp=10);
 
 		// $col = $this->add('Columns');
 		// $col1 = $col->addColumn('4');

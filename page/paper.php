@@ -10,6 +10,10 @@ class page_paper extends \xepan\base\Page{
 
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Paper');
+		$model->addCondition('is_paper',true);
+		$model->addCondition('is_mock_paper',false);
+		$model->addCondition('is_mock_category',false);
+
 		$model->setOrder('id','desc');
 		$crud->setModel($model);
 		$crud->grid->addHook('formatRow',function($g){
@@ -25,7 +29,7 @@ class page_paper extends \xepan\base\Page{
 		}
 		
 		$crud->grid->removeAttachment();
-		$crud->grid->addPaginator($ipp=25);
+		$crud->grid->addPaginator($ipp=10);
 		$crud->grid->addQuickSearch(['name']);
 		$crud->grid->removeColumn('keyword');
 	}

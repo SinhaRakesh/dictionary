@@ -21,6 +21,6 @@ class page_article extends \xepan\base\Page{
 		$crud->grid->removeAttachment();
 
 		$crud->grid->addQuickSearch(['name']);
-		$crud->grid->addPaginator($ipp=50);
+		$crud->grid->addPaginator($ipp=10);
 	}
 }

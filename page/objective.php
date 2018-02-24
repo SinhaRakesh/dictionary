@@ -17,7 +17,7 @@ class page_objective extends \xepan\base\Page{
 		$crud->grid->addQuickSearch(['name']);
 		$crud->grid->removeAttachment();
 
-		$crud->grid->addPaginator($ipp=25);
+		$crud->grid->addPaginator($ipp=10);
 
 		
 	}

@@ -16,5 +16,7 @@ class page_newword extends \xepan\base\Page{
 		$crud->grid->removeAttachment();
 		$crud->grid->add('misc/Export');
 		$crud->grid->removeColumn('status');
+
+		$crud->grid->addPaginator($ipp=10);
 	}
 }

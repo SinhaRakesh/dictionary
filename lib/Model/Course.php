@@ -86,4 +86,14 @@ class Model_Course extends Model_Base_Table{
 		$this->app->redirect($this->app->url('xavoc/dictionary/managequestion',['paper_id'=>$this->id]));
 
 	}
+
+	function deactive(){
+		$this['status'] = "Inactive";
+		$this->save();
+	}
+
+	function active(){
+		$this['status'] = "Active";
+		$this->save();
+	}
 }

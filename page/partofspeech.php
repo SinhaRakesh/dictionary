@@ -12,5 +12,7 @@ class page_partofspeech extends \xepan\base\Page{
 		$crud->setModel($model);
 
 		$crud->grid->addQuickSearch(['name']);
+
+		$crud->grid->addPaginator(10);
 	}
 }
