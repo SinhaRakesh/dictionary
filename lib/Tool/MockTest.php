@@ -4,7 +4,7 @@ namespace xavoc\dictionary;
 
 class Tool_MockTest extends \xepan\cms\View_Tool{
 
-	public $options = ['login_page'=>'login'];
+	public $options = ['login_page'=>'login/?layout=login_view'];
 
 	function init(){
 		parent::init();
