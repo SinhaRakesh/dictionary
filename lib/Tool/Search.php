@@ -17,8 +17,8 @@ class Tool_Search extends \xepan\cms\View_Tool{
 		$form->add('xepan\base\Controller_FLC')
 			->addContentSpot()
 			->layout([
-				'search~'=>'&nbsp~c1~10',
-				'FormButtons~'=>'c2~2'
+				'search~'=>'&nbsp~c1~9',
+				'FormButtons~'=>'c2~3'
 			]);
 
 		$model =$this->add('xavoc\dictionary\Model_Paper');

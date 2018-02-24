@@ -11,8 +11,7 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 		
 		if($this->owner instanceof \AbstractController) return;
 		
-		
-		$slug = $_GET['slug'];
+		$slug = $this->app->stickyGET('slug');
 		
 		$course = $this->add('xavoc\dictionary\Model_Course');
 		$course->addCondition('slug_url',$slug);		
@@ -41,8 +40,8 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 			$list->template->trySet('heading',$course['name']);
 
 			if($paper->count()->getOne() > 20){
-					$paginator = $list->add('paginator',['ipp'=>20]);
-					$paginator->setRowsPerPage(20);
+				$paginator = $list->add('Paginator',['ipp'=>20]);
+				$paginator->setRowsPerPage(20);
 			}else{
 				$list->template->tryDel('paginator_wrapper');
 			}
@@ -52,13 +51,13 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 
 		$model = $this->add('xavoc\dictionary\Model_Course')
 					->addCondition('parent_course_id',$course->id);
-
+		
 		if($model->count()->getOne()){
 			foreach ($model as $m) {
 				$paper = $this->add('xavoc\dictionary\Model_Paper');
 				$paper->addCondition('parent_course_id',$m->id);
 				if(!$paper->count()->getOne()){
-					return;
+					continue;
 				}
 
 				$list = $this->add('CompleteLister',null,'paper_list',['view\tool\coursedetail','paper_list']);
@@ -70,7 +69,7 @@ class Tool_CourseDetail extends \xepan\cms\View_Tool{
 				$list->template->trySet('heading',$m['name']);
 
 				if($paper->count()->getOne() > 20){
-					$paginator = $list->add('paginator',['ipp'=>20]);
+					$paginator = $list->add('Paginator',['ipp'=>20]);
 					$paginator->setRowsPerPage(20);
 				}else{
 					$list->template->tryDel('paginator_wrapper');

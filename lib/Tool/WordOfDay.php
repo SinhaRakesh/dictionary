@@ -32,7 +32,6 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 			$model = $this->add('xavoc\dictionary\Model_Dictionary');
 			$model->addCondition('slug_url',$slug);
 		}
-
 		$model->setLimit(1);
 		$model->tryLoadAny();
 		
@@ -59,12 +58,12 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 
 		$this->template->set('url',$this->app->url($this->options['detail_page'],['slug'=>$model['slug_url']]));
 		$this->template->set('word_of_day_date',date('l, F d, Y',strtotime($model['word_of_day_on_date'])));
-
+		
 		if(!$this->options['show_image']){
 			$this->template->tryDel('img_wrapper');
 			$this->template->tryDel('recent_words');
 			$this->template->tryDel('previous_wordofday');
-			
+			$this->template->tryDel('sentance_wrapper');
 		}else{
 
 			$this->template->tryDel('read_more_button');
@@ -73,8 +72,8 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 			else
 				$this->template->set('image_url',"websites/".$this->app->current_website_name."/www/img/word_of_day_default.jpg");
 
-			if(!$model['sentance']){	
-				$view->template->tryDel('sentance_wrapper');
+			if(!$model['sentance']){
+				$this->template->tryDel('sentance_wrapper');
 			}else{
 				$list = explode(':',$model['sentance']);
 				$shtml = "";
