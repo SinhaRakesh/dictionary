@@ -80,7 +80,8 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			$template .= "detail";
 		else
 			$template .= "list";
-						
+		
+				
 		$this->complete_lister = $cl = $this->add('CompleteLister',null,null,['view/tool/'.strtolower($template)]);
 		$cl->setModel($model);
 		
@@ -116,16 +117,16 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			
 			$hdetail = '<div class="row description-detail">';
 			if(isset($paper) and $paper->loaded()){
-				$hdetail .= '<div class="col-md-3 heading-middle">';
+				$hdetail .= '<div class="col-md-12 heading-middle">';
 				$hdetail .= '<p>'.$paper['parent_course'].'</p>';
 			}else{
-				$hdetail .= '<div class="col-md-3 ">';
+				$hdetail .= '<div class="col-md-12 ">';
 			}
 			$hdetail .= '</div>';
-			$hdetail .= '<div class="col-md-6 heading-middle">';
+			$hdetail .= '<div class="col-md-12 heading-middle">';
 			$hdetail .= '<p>प्रश्नो के उत्तर के लिए उत्तर पर क्लिक करें </p>';
 			$hdetail .= '</div>';
-			$hdetail .= '<div class="col-md-3 heading-middle">';
+			$hdetail .= '<div class="col-md-12 heading-middle">';
 			$hdetail .= '<p> Published on: '.$model['created_at'].'</p>';
 			$hdetail .= '</div>';
 			$hdetail .= '</div>';

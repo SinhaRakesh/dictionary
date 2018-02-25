@@ -21,7 +21,7 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 		$form->add('xepan\base\Controller_FLC')
 			->addContentSpot()
 			->layout([
-				'search~'=>'<strong style="font-size:20px;"> डिक्शनरी सर्च </strong>~c1~10',
+				'search~'=>'<strong style="font-size:20px;">स्टुडेंट  डिक्शनरी सर्च </strong>~c1~10',
 				'FormButtons~'=>'c2~2'
 			]);
 
@@ -246,6 +246,9 @@ class Tool_Dictionary extends \xepan\cms\View_Tool{
 				$g->current_row['extra_class'] = "btn-success";
 			});
 		}
-
 	}
+
+	// function defaultTemplate(){
+	// 	return ['view\tool\dictionary'];
+	// }
 }

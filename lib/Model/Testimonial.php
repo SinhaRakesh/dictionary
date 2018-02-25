@@ -24,6 +24,7 @@ class Model_Testimonial extends Model_Base_Table{
 		$this->addField('status')->enum(['Pending','Approved','Rejected'])->defaultValue('Pending');
 		$this->addField('created_at')->type('datetime')->defaultValue($this->app->now)->sortable(true);
 
+		$this->addExpression('profile_img')->set($this->refSQL('student_id')->fieldQuery('image'));
 		$this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->is([

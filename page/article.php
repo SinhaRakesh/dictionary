@@ -14,13 +14,19 @@ class page_article extends \xepan\base\Page{
 
 		$crud->grid->addHook('formatRow',function($g){
 			$g->current_row_html['image'] = '<img style="width:200px;" src="'.$g->model['image'].'" />';
+			// $g->current_row_html['description'] = $g->model['description'];
 		});
 
 		$crud->grid->addFormatter('name','wrap');
 		$crud->grid->removeColumn('status');
+		$crud->grid->removeColumn('description');
 		$crud->grid->removeAttachment();
 
 		$crud->grid->addQuickSearch(['name']);
 		$crud->grid->addPaginator($ipp=10);
+
+		$crud->grid->addFormatter('name','Wrap');
+		// $crud->grid->addFormatter('description','Wrap');
+		$crud->grid->addFormatter('slug_url','Wrap');
 	}
 }

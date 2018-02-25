@@ -59,7 +59,7 @@ class Tool_Search extends \xepan\cms\View_Tool{
 		// 		]
 		// 	];
 
-		$form->addSubmit('Search')->addClass('text-center btn btn-primary btn-block');
+		$form->addSubmit('Search')->addClass('text-center btn btn-primary');
 		
 		// if($sdid = $_GET['search_dictionary_id']){
 		// 	$view = $this->add('View',null,null,['view/dictionarydetail']);

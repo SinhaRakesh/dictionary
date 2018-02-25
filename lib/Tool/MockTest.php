@@ -37,14 +37,17 @@ class Tool_MockTest extends \xepan\cms\View_Tool{
 			$mt->addExpression('paper_slug')->set($mt->refSQL('paper_id')->fieldQuery('slug_url'));
 			$mt->load($testid);
 
+			$this->paper_model = $paper_model = $this->add('xavoc\dictionary\Model_MockPaper');
+			$paper_model->load($mt['paper_id']);
+
 			// if has finished time or current time is expired
 			if((strtotime($this->app->now) > strtotime($mt['deadline_at'])) || $mt['finished_at']){	
 				$this->testFinished($mt);
 				return;
+			}else{
+				$this->template->tryDel('mock_result');
 			}
 
-			$this->paper_model = $paper_model = $this->add('xavoc\dictionary\Model_MockPaper');
-			$paper_model->load($mt['paper_id']);
 
 			$dates = $this->app->my_date_diff($mt['deadline_at'],$this->app->now);
 			$target_date = date('Y/m/d H:i:s',strtotime("+".$dates['seconds_total']." seconds", strtotime($this->app->now)));
@@ -59,10 +62,11 @@ class Tool_MockTest extends \xepan\cms\View_Tool{
 				$this->app->memorize('running_mock_test_id',$mock_test->id);
 			}
 			$target_date = date('Y/m/d H:i:s',strtotime("+".$paper_model['mock_test_duration']." minutes", strtotime($this->app->now)));
+			$this->template->tryDel('mock_result');			
 		}
 
 
-		$this->add('View',null,'header')->setElement('h2')->set('Mock Test of '.$paper_model['name']);
+		$this->add('View',null,'header')->setElement('h2')->set('Mock Test : '.$paper_model['name']);
 		$question_set = $paper_model->getQuestions();
 		$range = $question_set->count()->getOne();
 
@@ -126,6 +130,8 @@ class Tool_MockTest extends \xepan\cms\View_Tool{
 			$g->current_row_html['answer_form'] = $form->getHtml();
 		});
 
+		$this->template->trySet('profile_img',$student['image']);
+		$this->template->trySet('student_name',$student['name']);
 	}
 
 	function recursiveRender(){
@@ -138,13 +144,14 @@ class Tool_MockTest extends \xepan\cms\View_Tool{
 
 
 	function testFinished($test_model){
-		$v = $this->add('View')->addClass('alert alert-info');
-		$v->setHtml('Thank You <br/>Start Time: '.$test_model['started_at'].'<br/> Finished Time: '.$test_model['finished_at'].'<br/> DeadLine Time: '.$test_model['deadline_at']);
+		$this->template->tryDel('mock_test');
 
-		$restart_btn = $this->add('Button')->set('Restart Test')->addClass('btn btn-success');
+		$this->template->trySet('paper_name',$this->paper_model['name']);
+
+		$restart_btn = $this->add('Button')->setHtml('<strong> Restart Test</strong>')->addClass('btn btn-success btn-block restart-btn');
 		if($restart_btn->isClicked()){
 			$this->app->forget('running_mock_test_id');
-			$this->app->redirect($this->app->url());
+			$this->app->redirect($this->app->url('mock-category'));
 		}
 	}
 }

@@ -36,6 +36,7 @@ class page_managequestion extends \xepan\base\Page{
 
 
 		$form = $this->add('Form');
+		$view = $this->add('View');
 		$crud = $this->add('xepan\hr\CRUD',['allow_add'=>false]);
 		$crud->form->add('xepan\base\Controller_FLC')
 			->makePanelsCoppalsible(true)
@@ -103,6 +104,9 @@ class page_managequestion extends \xepan\base\Page{
 		$join->addField('course_id');
 		$record->addCondition('course_id',$paper_id);
 		$record->setOrder('id','desc');
+
+		$view->set('Total Question: '.$record->count()->getOne())->addClass('alert alert-info');
+
 		if($course['paper_type'] == "Objective")
 			$crud->setModel($record,['name','status','display_order','a','b','c','d','answer','description'],['name','answer','status','action']);
 		else

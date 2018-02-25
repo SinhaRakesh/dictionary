@@ -21,5 +21,8 @@ class page_mockcategory extends \xepan\base\Page{
 		$crud->grid->addPaginator($ipp=10);
 		$crud->grid->addQuickSearch(['name']);
 		$crud->grid->removeColumn('keyword');
+
+		$crud->grid->addFormatter('name','Wrap');
+		$crud->grid->addFormatter('slug_url','Wrap');
 	}
 }

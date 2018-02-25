@@ -15,6 +15,7 @@ class page_mockpaper extends \xepan\base\Page{
 
 		$crud->grid->addHook('formatRow',function($g){
 			$g->current_row_html['image'] = '<img style="width:100px;" src="'.$g->model['image'].'" />';
+			$g->current_row_html['description'] = $g->model['description'];
 		});
 
 		if($crud->isEditing()){
@@ -30,5 +31,10 @@ class page_mockpaper extends \xepan\base\Page{
 		$crud->grid->addPaginator($ipp=10);
 		$crud->grid->addQuickSearch(['name']);
 		$crud->grid->removeColumn('keyword');
+
+		$crud->grid->addFormatter('name','Wrap');
+		$crud->grid->addFormatter('parent_course','Wrap');
+		$crud->grid->addFormatter('slug_url','Wrap');
+		$crud->grid->addFormatter('description','Wrap');
 	}
 }

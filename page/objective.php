@@ -19,6 +19,8 @@ class page_objective extends \xepan\base\Page{
 
 		$crud->grid->addPaginator($ipp=10);
 
+		$crud->grid->addFormatter('name','Wrap');
+		$crud->grid->addFormatter('answer','Wrap');
 		
 	}
 }

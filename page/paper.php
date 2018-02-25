@@ -32,5 +32,11 @@ class page_paper extends \xepan\base\Page{
 		$crud->grid->addPaginator($ipp=10);
 		$crud->grid->addQuickSearch(['name']);
 		$crud->grid->removeColumn('keyword');
+		$crud->grid->removeColumn('status');
+		
+		$crud->grid->addFormatter('name','Wrap');
+		$crud->grid->addFormatter('parent_course','Wrap');
+		$crud->grid->addFormatter('slug_url','Wrap');
+		$crud->grid->addFormatter('description','Wrap');
 	}
 }

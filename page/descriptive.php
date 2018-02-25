@@ -16,5 +16,8 @@ class page_descriptive extends \xepan\base\Page{
 		$crud->grid->removeAttachment();
 		$crud->grid->addPaginator($ipp=10);
 		$crud->grid->addQuickSearch(['name']);
+
+		$crud->grid->addFormatter('name','Wrap');
+		$crud->grid->addFormatter('slug_url','Wrap');
 	}
 }

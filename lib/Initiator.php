@@ -15,17 +15,24 @@ class Initiator extends \Controller_Addon {
         $m = $this->app->top_menu->addMenu('Pathshala');
         $m->addItem(['Course','icon'=>'fa fa-cog'],'xavoc_dictionary_course');
         $m->addItem(['Paper','icon'=>'fa fa-cog'],'xavoc_dictionary_paper');
-        $m->addItem(['Mock Category','icon'=>'fa fa-cog'],'xavoc_dictionary_mockcategory');
-        $m->addItem(['Mock Paper','icon'=>'fa fa-cog'],'xavoc_dictionary_mockpaper');
         $m->addItem(['Descriptive','icon'=>'fa fa-cog'],'xavoc_dictionary_descriptive');
         $m->addItem(['Objective','icon'=>'fa fa-cog'],'xavoc_dictionary_objective');
         $m->addItem(['Article','icon'=>'fa fa-cog'],'xavoc_dictionary_article');
-        $m->addItem(['Dictionary','icon'=>'fa fa-cog'],'xavoc_dictionary_dictionary');
+        
+
+        $m = $this->app->top_menu->addMenu('Dictionary');
         $m->addItem(['Word of day','icon'=>'fa fa-cog'],'xavoc_dictionary_wordofday');
+        $m->addItem(['Dictionary','icon'=>'fa fa-cog'],'xavoc_dictionary_dictionary');
         $m->addItem(['New Word From Client','icon'=>'fa fa-cog'],'xavoc_dictionary_newword');
         $m->addItem(['Part Of Speech','icon'=>'fa fa-cog'],'xavoc_dictionary_partofspeech');
-        $m->addItem(['Student','icon'=>'fa fa-cog'],'xavoc_dictionary_student');
-        $m->addItem(['Testimonial','icon'=>'fa fa-cog'],'xavoc_dictionary_testimonial');
+        
+        $mock = $this->app->top_menu->addMenu('Mock');
+        $mock->addItem(['Mock Category','icon'=>'fa fa-cog'],'xavoc_dictionary_mockcategory');
+        $mock->addItem(['Mock Paper','icon'=>'fa fa-cog'],'xavoc_dictionary_mockpaper');
+        $mock->addItem(['Student','icon'=>'fa fa-cog'],'xavoc_dictionary_student');
+        $mock->addItem(['User Account','icon'=>'fa fa-cog'],'xepan_hr_user');
+        $mock->addItem(['Testimonial','icon'=>'fa fa-cog'],'xavoc_dictionary_testimonial');
+        $mock->addItem(['Quote','icon'=>'fa fa-cog'],'xavoc_dictionary_quote');
 
         return $this;
     }
@@ -72,6 +79,7 @@ class Initiator extends \Controller_Addon {
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_SearchResult','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_MockCategory','Dictionary');
         $this->app->exportFrontEndTool('xavoc\dictionary\Tool_MemberAccount','Dictionary');
+        $this->app->exportFrontEndTool('xavoc\dictionary\Tool_Testimonial','Dictionary');
                 
         return $this;
     }

@@ -1,17 +1,93 @@
 <div id="{$_name}" class="{$class}" style="{$style}">
-    {$header}
+    {mock_test}
     <div class="row">
-        <div class="col-md-9">
-            {$question_lister}
+        <div class="col-md-9 mock-left-col">
+            <div style="margin-bottom: 20px;">
+                {$header}
+            </div>
+            <div class="row paper-detail">
+                <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+                    Total Question: 00
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+                    Remaining: 00
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+                    Due Question: 00  
+                </div>
+            </div>
+            <div class="alert alert-primary" style="background-color: #54BCE8;margin-bottom: 0px;"></div>
+            <div class="mock-paper-wrapper">
+                {$question_lister}
+            </div>
         </div>
-        <div class="col-md-3">
-            <div class="mock-timer">
-                {$timer}   
+        <div class="col-md-3 text-center mock-right-col" >
+            <div class="profile-wrapper">
+                <img src="{$profile_img}" style="width:80px;">
+                <p><strong>{$student_name}</strong></p>
+            </div>
+            <div class="timer-wrapper">
+                <div class="mock-timer">
+                    {$timer}   
+                </div>
             </div>
             <div class="submit-paper">
-			{$paper_submit_button}
+                {$paper_submit_button}
             </div>
         </div>
     </div>
+    {/}
+
+    {mock_result}
+    <div class="mock-result">
+        <div class="text-center">
+            <h2>Mock Test Result </h2>
+            <h2>{$paper_name}</h2>
+        </div>
+        <br/>
+        <table border="1" style="width:100%;font-weight: bold;">
+            <tr>
+                <td>
+                    <p class="result-cell">Total Question: 00</p>
+                </td>
+                <td>
+                    <p class="result-cell">Attened Question: 00</p>
+                </td>
+                <td>
+                    <p class="result-cell">Right Answer Question: 00</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="result-cell">Total Mark:</p>
+                </td>
+                <td>
+                    <p class="result-cell">Obtained Mark: </p>
+                </td>
+                <td>
+                    <p class="result-cell">Percentage: </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="result-cell result">Result: Pass/Fail</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="result-cell performance">Performance: Good/Bed/Excellent</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="text-center quote" style="margin-top: 22px;font-weight: bold;font-size: 20px;">
+                        {$quote} 
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    {/}
     {$Content}
+
 </div>
