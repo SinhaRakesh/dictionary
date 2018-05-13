@@ -29,6 +29,12 @@ class Tool_SearchResult extends \xepan\cms\View_Tool{
  		if($model->count()->getOne()){
 			$list = $this->add('xavoc\dictionary\View_SearchList',['type'=>'paper']);
 			$list->setModel($model);
+			$this->template->tryDel('no_record_found');
+		}else{
+			// no record found
+			$this->add('View',null,'no_record_found')
+				->setHtml("<p style='font-size:24px;color:gray;'>There are no results for: <br/><strong style='font-width:normal;'>$t</strong>, but we are adding new words/Papers daily.</p>");
+			$this->add('xavoc\dictionary\View_PaperCloud',null,'no_record_found');
 		}
 
 		// Article
