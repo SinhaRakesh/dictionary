@@ -10,11 +10,10 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 
 	function init(){
 		parent::init();
-		
+
 		if($this->owner instanceof \AbstractController) return;
 		$slug = $_GET['slug'];
-
-
+		
 		$model = $this->add('xavoc\dictionary\Model_Dictionary');
 		$model->addCondition('is_word_of_day',1);
 		$model->addCondition('duration',0);
@@ -117,8 +116,10 @@ class Tool_WordOfDay extends \xepan\cms\View_Tool{
 			if(!$model->count()->getOne()){
 				$list->template->tryDel('previous_heading');
 			}
-
 		}
+
+		// share url
+		$this->add('xavoc\dictionary\View_SocialShare',['owner_model'=>$this->model],'socialshare');
 	}
 
 	function defaultTemplate(){
