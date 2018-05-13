@@ -81,7 +81,6 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 		else
 			$template .= "list";
 		
-				
 		$this->complete_lister = $cl = $this->add('CompleteLister',null,null,['view/tool/'.strtolower($template)]);
 		$cl->setModel($model);
 		
@@ -133,6 +132,10 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 
 			$cl->template->trySetHtml('heading_description',$hdetail);
 
+			if($cl->template->hasTag('extra_button') AND $paper->loaded()){
+				$cl->add('xavoc\dictionary\View_Bookmark',['library_id'=>$paper->id],'extra_button');
+			}
+
 		}else{
 			$cl->template->trySet('heading_description',$this->options['description']);
 		}
@@ -144,6 +147,8 @@ class Tool_LibraryList extends \xepan\cms\View_Tool{
 			
 			$cl->add('xavoc\dictionary\View_PaperCloud',['type'=>$type],'paper_cloud');
 		}
+
+
 	}
 
 
