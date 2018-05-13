@@ -5,7 +5,7 @@ namespace xavoc\dictionary;
 class Tool_WordOfDay extends \xepan\cms\View_Tool{
 	public $options = [
 			'show_image'=>false,
-			'detail_page'=>'word-of-day'
+			'detail_page'=>'word-of-day',
 		];
 
 	function init(){
