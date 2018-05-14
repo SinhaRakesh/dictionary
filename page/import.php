@@ -67,7 +67,7 @@ class page_import extends \Page{
 				}
 				$i++;
 			}
-			$c->out("Total = ". $i." Record added successfully");
+			$c->out("Total = ".($i-1)." Record added successfully");
 		});
 	}
 	function page_index(){
