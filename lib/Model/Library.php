@@ -90,7 +90,7 @@ class Model_Library extends Model_Base_Table{
 		$old->addCondition('id','<>',$this->id);
 		$old->tryLoadAny();
 		if($old->loaded()){
-			throw $this->exception('slug_url already exists','ValidityCheck')
+			throw $this->exception($this['slug_url'].' slug_url already exists','ValidityCheck')
 			->setField('slug_url');
 		}
 

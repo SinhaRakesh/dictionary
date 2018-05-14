@@ -22,5 +22,6 @@ class page_objective extends \xepan\base\Page{
 		$crud->grid->addFormatter('name','Wrap');
 		$crud->grid->addFormatter('answer','Wrap');
 		
+		$crud->grid->add('xavoc\dictionary\View_LibraryImport',null,'grid_buttons');
 	}
 }
