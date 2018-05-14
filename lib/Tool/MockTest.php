@@ -23,10 +23,10 @@ class Tool_MockTest extends \xepan\cms\View_Tool{
 			$this->student = $student = $this->add('xavoc\dictionary\Model_Student');
 			// todo removed
 			$student->tryLoadAny();
-			// if(!$student->loadLoggedIn('Student')){
-			// 	$this->add('View')->addClass('alert alert-info')->set('You are not the registered user');
-			// 	return;
-			// }
+			if(!$student->loadLoggedIn('Student')){
+				$this->add('View')->addClass('alert alert-info')->set('You are not the registered user');
+				return;
+			}
 		}
 
 		// if model is loaded
@@ -132,6 +132,8 @@ class Tool_MockTest extends \xepan\cms\View_Tool{
 
 		$this->template->trySet('profile_img',$student['image']);
 		$this->template->trySet('student_name',$student['name']);
+		$this->template->trySet('total_question',$this->total_question);
+		// $this->template->trySet('remaining_question',$this->remaining_question);
 	}
 
 	function recursiveRender(){
@@ -145,8 +147,18 @@ class Tool_MockTest extends \xepan\cms\View_Tool{
 
 	function testFinished($test_model){
 		$this->template->tryDel('mock_test');
-
 		$this->template->trySet('paper_name',$this->paper_model['name']);
+
+		$question_set = $this->paper_model->getQuestions();
+		$total_question = $question_set->count()->getOne();
+
+		// running mock test
+		$running_testid = $this->app->recall('running_mock_test_id');
+		$test = $this->add('xavoc\dictionary\Model_MockTest')->load($running_testid);
+		$this->template->trySet('total_question',$total_question);
+		$this->template->trySet('attended_question',$test['attended_question']);
+		$this->template->trySet('right_answer',$test['right_answer']);
+		
 
 		$restart_btn = $this->add('Button')->setHtml('<strong> Restart Test</strong>')->addClass('btn btn-success btn-block restart-btn');
 		if($restart_btn->isClicked()){

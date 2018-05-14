@@ -7,13 +7,13 @@
             </div>
             <div class="row paper-detail">
                 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-                    Total Question: 00
+                    Total Question: {$total_question}
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12 mock-remaining-question">
+                    Remaining: {$remaining_question}
                 </div>
                 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-                    Remaining: 00
-                </div>
-                <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-                    Due Question: 00  
+                    Due Question: {$due_question}
                 </div>
             </div>
             <div class="alert alert-primary" style="background-color: #54BCE8;margin-bottom: 0px;"></div>
@@ -48,24 +48,24 @@
         <table border="1" style="width:100%;font-weight: bold;">
             <tr>
                 <td>
-                    <p class="result-cell">Total Question: 00</p>
+                    <p class="result-cell">Total Question: {$total_question}</p>
                 </td>
                 <td>
-                    <p class="result-cell">Attened Question: 00</p>
+                    <p class="result-cell">Attened Question: {$attended_question}</p>
                 </td>
                 <td>
-                    <p class="result-cell">Right Answer Question: 00</p>
+                    <p class="result-cell">Right Answer Question: {$right_answer}</p>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <p class="result-cell">Total Mark:</p>
+                    <p class="result-cell">Total Mark: {$total_mark}</p>
                 </td>
                 <td>
-                    <p class="result-cell">Obtained Mark: </p>
+                    <p class="result-cell">Obtained Mark: {$obtained_mark}</p>
                 </td>
                 <td>
-                    <p class="result-cell">Percentage: </p>
+                    <p class="result-cell">Percentage: {$percentage}</p>
                 </td>
             </tr>
             <tr>
