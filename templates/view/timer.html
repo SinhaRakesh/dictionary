@@ -1,19 +1,39 @@
 <div id="{$_name}" class="{$class}" style="{$style}">
 	{$Content}
 	<div id="{$_name}timer" class="timer-section">
-		
 	</div>
 
+	<div class="modal fade  modal-timeout" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	  <div class="modal-dialog modal-md" role="document">
+	    <div class="modal-content">
+		  	<div class="modal-header">
+		        <h4 class="modal-title">Paper Time Out !</h4>
+		    </div>
+		    <div class="modal-body">
+        		<h2>Your Paper Auto Submitted</h2>
+      		</div>
+		    <div class="modal-footer">
+		        <button type="button" class="btn btn-primary btn-block submit-from-popupwindow"> View Your Result Now</button>
+		    </div>
+	    </div>
+	  </div>
+	</div>
 	<script type="text/javascript">
 		$( document ).ready(function() {
 			$("#{$_name}timer").countdown("{$target_date}", function(event) {
 				$(this).text(
 					event.strftime('%H:%M:%S')
 				);
-
-			}).on('finish.countdown', function(event) {
-				$('.mock-submit-button').trigger('click').remove();
-				$(this).html('This Time has expired!').parent().addClass('disabled');
+			}).on('finish.countdown', function(event){
+				$('.modal-timeout').modal({
+					show: true,
+            		keyboard: false,
+            		backdrop: 'static'
+				});
+				$('.submit-from-popupwindow').click(function(){
+					$('.mock-submit-button').trigger('click').remove();
+				});
+				$(this).html('Paper Time Out').parent().addClass('disabled');
 			});
 		});
 	</script>
