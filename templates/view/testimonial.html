@@ -2,15 +2,21 @@
 <div class="{$class} registration_slid" id="{$_name}" style="{$style}">
    <h2 class="xepan-component xepan-editable-text xepan-no-richtext" xepan-component-name="heading" id="xepan-a3a51f5c-76d0-4af5-f270-0c4bd8b9e7b4" scrollamount="" contenteditable="false">टेस्टीमोनिअल्स <br></h2>
       <div class="registration_slider reg_slider ">
-      {rows}
-      {row}
-         <div class="item single_registration_slider">
-            <div class="author_details">
-               <img src="{$profile_img}" alt="{$student}"><h2>{$created_by}</h2>
-            </div>
-            <p>{$description}</p>
+         <div class="carousel slide" data-ride="carousel">
+           <div class="carousel-inner" role="listbox">
+               {rows}
+                  {row}
+                  <div class="item single_registration_slider {$active} text-center">
+                     <img src="{$profile_img}" alt="{$student}" style="width: 100px;height: 100px; margin:0 auto; border: 1px solid gray;">
+                     <div class="author_details">
+                        <h2>{$student}</h2>
+                        <p>{$description}</p>
+                     </div>
+                  </div>
+               {/}{/}
+           </div>
          </div>
-      {/}
-      {/}
       </div>
 </div>
+
+
