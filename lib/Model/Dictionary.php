@@ -16,6 +16,9 @@ class Model_Dictionary extends Model_Library{
 		$this->getElement('d')->destroy();
 		$this->getElement('answer')->destroy();
 		
+		$this->getElement('description')->hint('comma(,) seperated multiple values');
+		$this->getElement('synonyms')->hint('comma(,) seperated multiple values');
+		$this->getElement('antonyms')->hint('comma(,) seperated multiple values');
 		$this->addHook('beforeSave',$this);
 	}
 

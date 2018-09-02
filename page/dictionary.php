@@ -17,12 +17,12 @@ class page_dictionary extends \xepan\base\Page{
 					'slug_url'=>'c2~3',
 					'part_of_speech_id'=>'c3~3',
 					'status'=>'c4~3',
-					'synonyms'=>'c5~12',
-					'antonyms'=>'c6~12',
-					'description'=>'c11~6',
+					'synonyms'=>'c5~12~comma(,) seperated multiple values',
+					'antonyms'=>'c6~12~comma(,) seperated multiple values',
+					'description'=>'c11~6~comma(,) seperated multiple values',
 					'sentance'=>'c12~6',
-					'is_word_of_day~'=>'c13~6',
-					'is_popular~'=>'c14~6',
+					'is_word_of_day~'=>'c13~12',
+					'is_popular~'=>'c14~12',
 					'FormButtons~'=>'c15~6'
 				]);
 		$form->addSubmit('Add')->addClass('btn btn-primary');
