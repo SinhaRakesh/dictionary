@@ -8,8 +8,11 @@ class page_student extends \Page{
 	function init(){
 		parent::init();
 
+		$model = $this->add('xavoc\dictionary\Model_Student');
+		$model->getElement('user_id')->getModel()->addCondition('scope','WebsiteUser');
+
 		$crud = $this->add('CRUD');
-		$crud->setModel('xavoc\dictionary\Model_Student',['user','name','emails_str','contacts_str','image_id','image']);
+		$crud->setModel($model,['first_name','last_name','image_id','user_id'],['user','name','emails_str','contacts_str','image_id','image']);
 		$crud->grid->addPaginator(10);
 		$crud->grid->addHook('formatRow',function($g){
 			$g->current_row_html['image'] = '<img style="width:100px;" src="'.$g->model['image'].'" />';
