@@ -18,4 +18,17 @@ class Model_Descriptive extends Model_Library{
 
 		// $this->getElement('description')->display(array('form'=>'xepan\base\RichText'));
 	}
+
+	function page_course_association($page){	
+		$asso = $this->add('xavoc\dictionary\Model_LibraryCourseAssociation');
+		$asso->addCondition('library_id',$this->id);
+		$asso->getElement('course_id')
+			->getModel()
+			->addCondition('is_paper',true)
+			->addCondition('paper_type','Descriptive')
+			;
+
+		$crud = $page->add('CRUD');
+		$crud->setModel($asso);	
+	}
 }

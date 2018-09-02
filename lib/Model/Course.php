@@ -17,6 +17,7 @@ class Model_Course extends Model_Base_Table{
 		$this->hasOne('xavoc\dictionary\ParentCourse','parent_course_id')->sortable(true);
 
 		$this->addField('name');
+		$this->addField('parent_course_name')->system(true);
 		$this->addField('status')->enum(['Active','Inactive'])->defaultValue('Active');
 		$this->addField('page_name')->caption('course redirect to page');
 		$this->addField('display_sequence')->type('number')->hint('descending order')->defaultValue(0)->sortable(true);
@@ -34,7 +35,15 @@ class Model_Course extends Model_Base_Table{
 		$this->addField('keyword')->type('text');
 		$this->addField('created_at')->type('datetime')->defaultValue($this->app->now);
 		$this->hasMany('LibraryCourseAssociation','course_id');
+			
+		$this->addExpression('effective_name',function($m,$q){
+			return $q->expr("CONCAT_WS(' :: ',[0],[1])",
+					[
+						$m->getElement('name'),
+						$m->getElement('parent_course_name')
+					]);
 		
+		});
 		// $this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('beforeSave',$this);
@@ -65,6 +74,8 @@ class Model_Course extends Model_Base_Table{
 				->setField('slug_url');
 			}
 		}
+
+		$this['parent_course_name'] = $this['parent_course'];
 	}
 
 	function page_associate($page){

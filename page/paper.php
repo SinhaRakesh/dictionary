@@ -10,12 +10,22 @@ class page_paper extends \xepan\base\Page{
 
 		$crud = $this->add('xepan\hr\CRUD');
 		$model = $this->add('xavoc\dictionary\Model_Paper');
+		$model->getElement('mock_test_duration')->system(true);
 		$model->addCondition('is_paper',true);
 		$model->addCondition('is_mock_paper',false);
 		$model->addCondition('is_mock_category',false);
 
 		$model->setOrder('id','desc');
 		$crud->setModel($model);
+
+		if($crud->isEditing()){
+			$form = $crud->form;
+			$pc_field = $form->getElement('parent_course_id');
+			$pc_model = $pc_field->getModel();
+			$pc_model->addCondition([['is_mock_paper',false],['is_mock_paper',null]]);
+			$pc_model->addCondition([['is_paper',false],['is_paper',null]]);
+		}
+
 		$crud->grid->addHook('formatRow',function($g){
 			$g->current_row_html['image'] = '<img style="width:100px;" src="'.$g->model['image'].'" />';
 		});
