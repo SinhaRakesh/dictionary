@@ -18,7 +18,7 @@ class Model_Library extends Model_Base_Table{
 		$this->addField('name');
 		$this->addField('description')->type('text');
 		
-		$this->addField('type')->enum(['Descriptive','Dictionary','Objective','Article']);
+		$this->addField('type')->enum(['Descriptive','Dictionary','Objective','Article','Quote']);
 		$this->addField('a');
 		$this->addField('b');
 		$this->addField('c');
